@@ -1,0 +1,46 @@
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+.pointer {
+	cursor : pointer;
+}
+
+
+.bg {
+    background-image: url("img/wallpaper.jpg");
+    **background-color : #FFFFFF !important;
+}
+
+.login-box, .register-box {
+    width: 360px;
+    margin: 50px auto;
+}
+
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
