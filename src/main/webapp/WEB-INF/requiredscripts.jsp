@@ -4,6 +4,9 @@
 <script src="${midasLocation}/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="${midasLocation}/dist/js/jquery.sortable.js"></script>
 
+<!-- JQuery UI -->
+<script src="${midasLocation}/bower_components/jquery-ui/jquery-ui.min.js"></script>
+
 
 <!-- Bootstrap 3.3.7 -->
 <script src="${midasLocation}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -29,5 +32,8 @@
 
 <!-- OpenLayers -->
 <script type="text/javascript" src="/resources/ol.js"></script>
+
+<!-- Modal Draggable -->
+<script type="text/javascript" src="/resources/draggable-modal.js"></script>
 	
 	

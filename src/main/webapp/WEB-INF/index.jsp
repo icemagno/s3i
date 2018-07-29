@@ -87,6 +87,18 @@
                   </div>
                   -->
                   
+<div class="modal draggable fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+            <div class="modal-body">...</div>
+            <div class="modal-footer">...</div>
+        </div>
+    </div>
+</div>                  
+                  
+                  
+                  
                </div>
             </section>
          </div>
