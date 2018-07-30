@@ -2,6 +2,10 @@ body.dragging, body.dragging * {
   cursor: move !important;
 }
 
+.sidebar-menu>li>a {
+	padding: 2px 5px 2px 15px !important;
+}
+
 .dragged {
   position: absolute;
   opacity: 0.5;

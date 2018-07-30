@@ -2,8 +2,8 @@
  <footer class="main-footer">
    <!-- To the right -->
    <div class="pull-right hidden-xs">
-     magno.mabreu@gmail.com
+     v1.2.234
    </div>
    <!-- Default to the left -->
-   <strong>Carlos Magno Abreu</strong> 
+   <strong>Sistema Phoenix</strong> 
  </footer>

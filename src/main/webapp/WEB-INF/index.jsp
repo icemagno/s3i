@@ -19,6 +19,9 @@
                <div class="navbar-custom-menu">
                   <ul class="nav navbar-nav">
                      <li>
+                        <a href="/logout"><i class="fa fa-power-off"></i></a>
+                     </li>
+                     <li>
                         <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                      </li>
                   </ul>
@@ -37,34 +40,35 @@
                         <!-- Caixa da Esquerda  -->
                         <div class="box-body">
 							
-    <div class="mailbox-controls">
-      <!-- Check all button -->
-      <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-      </button>
-      <div class="btn-group">
-        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-      </div>
-      <!-- /.btn-group -->
-      <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-      <div class="pull-right">
-        
-        <div class="btn-group">
-          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-        </div>
-        <!-- /.btn-group -->
-      </div>
-      <!-- /.pull-right -->
-    </div>						
+						    <div class="mailbox-controls">
+						      <!-- Check all button -->
+						      <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
+						      <div class="btn-group">
+						        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+						        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
+						        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
+						      </div>
+						      <!-- /.btn-group -->
+						      <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+						      <div class="pull-right">
+						        
+						        <div class="btn-group">
+						          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+						          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+						        </div>
+						        <!-- /.btn-group -->
+						      </div>
+						      <!-- /.pull-right -->
+						    </div>						
 							
                         </div>
                      </div>
-<!--  https://www.youtube.com/watch?v=iTZihYIm8as  -->
+                     
+                     
+<!-- ************************************************************************** -->
                      <div class="box box-primary">
                         <div class="box-header with-border">
-                           <h3 class="box-title">[SC-675] Tenente-Coronel Henrique</h3>
+                           <h3 class="box-title">[HelmetCam] 675 SD Henrique</h3>
                         </div>
                         <div id="videoPreview" class="box-body" style="background.color:white">
 	                        <div class="embed-responsive embed-responsive-4by3">
@@ -72,32 +76,9 @@
 	                        </div>
                         </div>
                      </div>
+<!-- ************************************************************************** -->
 
                   </div>
-                  <!-- 
-                  <div class="col-sm-9">
-                     <div class="box box-success">
-                         
-                        <div class="box-body pad">
-							<div id="world-map" style="height: calc(100vh - 180px); width: 100%;"></div>  
-                        </div>
-                        
-                        
-                     </div>
-                  </div>
-                  -->
-                  
-<div class="modal draggable fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
-            <div class="modal-body">...</div>
-            <div class="modal-footer">...</div>
-        </div>
-    </div>
-</div>                  
-                  
-                  
                   
                </div>
             </section>
@@ -110,13 +91,42 @@
          <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
             <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
             <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+            
          </ul>
          <!-- Tab panes -->
          <div class="tab-content">
             <!-- Home tab content -->
             <div class="tab-pane active" id="control-sidebar-home-tab">
-               <h3 class="control-sidebar-heading"><a href="/logout">Sair</a></h3>
-               <!-- /.control-sidebar-menu -->
+            
+				<ul class="sidebar-menu" data-widget="tree">
+			        <li class="header">Emergência</li>
+                    <li><a href="javascript:toggleHidrantes();"><i class="fa fa-circle-o text-red"></i><span> Hidrantes</span></a></li>
+                    <li><a href="#"><i class="fa fa-circle-o text-red"></i><span> Quartéis de Bombeiros</span></a></li>
+                    <li><a href="#"><i class="fa fa-circle-o text-red"></i><span> Hospitais</span></a></li>
+               	    <li><a href="#"><i class="fa fa-circle-o text-red"></i><span> Pontos de Pouso</span></a></li>
+				</ul>
+				<ul class="sidebar-menu" data-widget="tree">
+			        <li class="header">Apoio</li>
+					<li><a href="javascript:toggleOsm();"><i class="fa fa-circle-o text-blue"></i><span> Mapa OpenStreetMap</span></a></li>			                       	    
+					<li><a href="javascript:toggleApa();"><i class="fa fa-circle-o text-blue"></i><span> Áreas de Proteção</span></a></li>			                       	    
+					<li><a href="#"><i class="fa fa-circle-o text-blue"></i><span> Trânsito</span></a></li>			                       	    
+					<li><a href="javascript:toggleAeroTraffic();"><i class="fa fa-circle-o text-blue"></i><span> Tráfego Aéreo</span></a></li>			                       	    
+					<li><a href="#"><i class="fa fa-circle-o text-blue"></i><span> Escolas / Estádios</span></a></li>			                       	    
+				</ul>
+				<ul class="sidebar-menu" data-widget="tree">
+			        <li class="header">Unidades</li>
+					<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> HazMat</span></a></li>			                       	    
+					<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> Magirus</span></a></li>			                       	    
+					<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> UTI</span></a></li>			                       	    
+					<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> Apoio</span></a></li>			                       	    
+					<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> Pessoal (HelmetCam)</span></a></li>			                       	    
+				</ul>
+				<ul class="sidebar-menu" data-widget="tree">
+			        <li class="header">EPIC</li>
+					<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> Permeabilidade do Solo</span></a></li>			                       	    
+				</ul>
+               
+               
             </div>
             <!-- /.tab-pane -->
             <!-- Stats tab content -->
@@ -165,10 +175,18 @@
       <!-- ./wrapper -->
       <!-- LOAD JAVASCRIPT FILES -->
       <jsp:include page="requiredscripts.jsp" />
+
+	  <!-- Trafego Aereo -->
+	  <script type="text/javascript" src="/resources/airtraffic.js"></script>
+
       <!-- Magno -->
       <script src="/resources/sockjs.min.js"></script>
       <script src="/resources/stomp.min.js"></script>
       <script src="/resources/script.js"></script>  
       <script src="${midasLocation}/bower_components/ckeditor/ckeditor.js"></script>
+      
+	  <!-- Layer Control -->
+	  <script type="text/javascript" src="/resources/layers.js"></script>
+      
    </body>
 </html>

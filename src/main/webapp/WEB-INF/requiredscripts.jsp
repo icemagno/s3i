@@ -33,7 +33,5 @@
 <!-- OpenLayers -->
 <script type="text/javascript" src="/resources/ol.js"></script>
 
-<!-- Modal Draggable -->
-<script type="text/javascript" src="/resources/draggable-modal.js"></script>
 	
 	

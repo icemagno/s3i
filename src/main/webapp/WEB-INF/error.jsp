@@ -41,7 +41,7 @@
 		         
 		            <section class="content">
 		                     <h1 class="text-red">
-		                        <img style="width:40px;height:40px" src="/resources/img/editor-logo.png"> ${status} | Erro ao processar esta requisição
+		                        <img style="width:40px;height:40px" src="/resources/img/logo.png"> ${status} | Erro ao processar esta requisição
 		                     </h1>
 		                     <h3>O sistema encontrou um erro ao processar sua requisição.</h3>
 		                     <p class="text-justify">
@@ -58,7 +58,7 @@
          <hr class="footer-fixed">
          <div class="container footer-container">
             <div class="footer-links">
-               Carlos Magno Abreu - magno.mabreu@gmail.com 
+               Phoenix v1.2.234 
             </div>
          </div>
       </div>

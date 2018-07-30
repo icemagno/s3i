@@ -72,7 +72,7 @@
          <hr class="footer-fixed">
          <div class="container footer-container">
             <div class="footer-links">
-               Carlos Magno Abreu - magno.mabreu@gmail.com
+               Phoenix v1.2.234
             </div>
          </div>
       </div>

@@ -3,6 +3,14 @@ var textChanged = false;
 var myModule = null;
 var theMap = null;
 
+/* --------  Camadas ----------- */
+var hidranteLayer = null;
+var osmLayer = null;
+var apaLayer = null;
+var sateliteLayer = null;
+/* ------------------------------*/
+
+
 function connect() {
     var socket = new SockJS('/ws');
     stompClient = Stomp.over(socket);
@@ -62,19 +70,66 @@ function startMap() {
 		zoom: 7,
 	    minZoom: 2,
 	    maxZoom: 19,
-	   
 	});	
+
 	
 	theView.on('change:resolution', function( evt ) {
 		updateScale();
 	});	
 	
-	var osmLayer = new ol.layer.Tile({
+	/*  OpenStreetMap   */
+	osmLayer = new ol.layer.Tile({
 		source: new ol.source.OSM()
 	});
+	osmLayer.setVisible( false );
+	/* ------------ */
+
+	
+	/*  Satélite   */
+	sateliteLayer = new ol.layer.Tile({
+		source: new ol.source.XYZ({
+			url: 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+		})
+	});	 
+	sateliteLayer.setVisible( true );
+	/* ------------ */
+	
+	
+	/*  Hidrantes   */ 
+	hidranteLayer = new ol.layer.Tile({
+		source: new ol.source.TileWMS({
+			url: 'https://www.cmabreu.com.br/geoserver/wms',
+			params: {'LAYERS': 'osm:hidrantes', 'TILED': true, 'FORMAT': 'image/png8','tiled': true,},
+		})
+	});	
+	hidranteLayer.setVisible( false );
+	/* ------------ */
+	
+	/*  APA   */ 
+	apaLayer = new ol.layer.Tile({
+		source: new ol.source.TileWMS({
+			url: 'https://www.cmabreu.com.br/geoserver/wms',
+			params: {'LAYERS': 'osm:apa', 'TILED': true, 'FORMAT': 'image/png8','tiled': true,},
+		})
+	});	
+	apaLayer.setVisible( false );
+	/* ------------ */
+
+	/*  TESTE   */ 
+	//http://epic-webgis-portugal.isa.ulisboa.pt/wms/epic?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities
+	/*
+	epic = new ol.layer.Tile({
+		source: new ol.source.TileWMS({
+			url: 'https://firms.modaps.eosdis.nasa.gov/wms',
+			params: {'LAYERS': 'fires_modis_24', 'TILED': true, 'FORMAT': 'image/png8','tiled': true,},
+		})
+	});	
+	epic.setVisible( true );
+	*/
+	/* ------------ */	
 	
 	theMap = new ol.Map({
-		layers: [ osmLayer ],
+		layers: [ sateliteLayer, osmLayer, /*epic,*/ apaLayer, hidranteLayer ],
 		target: 'world-map',
 		renderer: 'canvas',
 		controls : [],
@@ -103,8 +158,5 @@ function initSystem() {
 
 initSystem();
 startMap();
-addTeste();
-
-
-
+initAirTraffic();
 
