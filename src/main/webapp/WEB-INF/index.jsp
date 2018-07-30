@@ -13,22 +13,33 @@
    <body class="hold-transition skin-blue layout-top-nav">
       <div class="wrapper">
          
-         <header class="main-header">
-            <nav class="navbar navbar-static-top" role="navigation">
-               <jsp:include page="pagelogo.jsp" />
-               <div class="navbar-custom-menu">
-                  <ul class="nav navbar-nav">
-                     <li>
-                        <a href="/logout"><i class="fa fa-power-off"></i></a>
-                     </li>
-                     <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                     </li>
-                  </ul>
-               </div>
-            </nav>
-         </header>
-         
+      <header class="main-header">
+        <!-- PAGE LOGO -->
+        <jsp:include page="pagelogo.jsp" />
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          <span class="sr-only">Toggle navigation</span>
+          </a>
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar" >
+          <!-- SIDEBAR -->
+          <jsp:include page="sidebar.jsp" />
+        </section>
+        <!-- /.sidebar -->
+      </aside>      
          <div style="position:relative" class="content-wrapper">
             
             <section class="content container-fluid">
