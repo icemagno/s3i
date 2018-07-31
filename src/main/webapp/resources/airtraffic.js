@@ -8,6 +8,7 @@ function toggleAeroTraffic() {
 	if( !aeroTrafficEnabled ) {
 		deleteAircrafts();
 	}
+	$("#aeroMenuCheck").toggle();
 }
 
 function activateAeroTrafficMonitor() {

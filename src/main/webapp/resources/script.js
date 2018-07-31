@@ -81,7 +81,7 @@ function startMap() {
 	osmLayer = new ol.layer.Tile({
 		source: new ol.source.OSM()
 	});
-	osmLayer.setVisible( false );
+	osmLayer.setVisible( true );
 	/* ------------ */
 
 	
@@ -91,7 +91,7 @@ function startMap() {
 			url: 'https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
 		})
 	});	 
-	sateliteLayer.setVisible( true );
+	sateliteLayer.setVisible( false );
 	/* ------------ */
 	
 	
@@ -117,19 +117,30 @@ function startMap() {
 
 	/*  TESTE   */ 
 	//http://epic-webgis-portugal.isa.ulisboa.pt/wms/epic?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities
-	/*
+	//https://nowcoast.noaa.gov/arcgis/services/nowcoast/sat_meteo_imagery_time/MapServer/WMSServer
+	
 	epic = new ol.layer.Tile({
 		source: new ol.source.TileWMS({
-			url: 'https://firms.modaps.eosdis.nasa.gov/wms',
-			params: {'LAYERS': 'fires_modis_24', 'TILED': true, 'FORMAT': 'image/png8','tiled': true,},
+			url: 'https://nowcoast.noaa.gov/arcgis/services/nowcoast/sat_meteo_imagery_time/MapServer/WmsServer',
+			params: {'LAYERS': '1', 'TILED': true, 'FORMAT': 'image/png8','tiled': true,},
 		})
 	});	
 	epic.setVisible( true );
-	*/
+	
 	/* ------------ */	
 	
+	/* MapServer */
+	// https://nowcoast.noaa.gov/arcgis/services/nowcoast/sat_meteo_imagery_time/MapServer/
+	var mapserver = new ol.layer.Tile({
+		source: new ol.source.XYZ({
+			url: 'https://nowcoast.noaa.gov/arcgis/rest/services/nowcoast/sat_meteo_imagery_time/MapServer/tile/{z}/{y}/{x}'
+		})
+	});	
+	/* ------------ */	
+	
+	
 	theMap = new ol.Map({
-		layers: [ sateliteLayer, osmLayer, /*epic,*/ apaLayer, hidranteLayer ],
+		layers: [ /* sateliteLayer, */ osmLayer, mapserver, apaLayer, hidranteLayer ],
 		target: 'world-map',
 		renderer: 'canvas',
 		controls : [],
