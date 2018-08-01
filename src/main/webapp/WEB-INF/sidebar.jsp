@@ -35,7 +35,7 @@
 			<ul class="treeview-menu" id="apoio-menu">
 				<li>
 					<a href="javascript:toggleOsm();"><i class="fa fa-circle-o text-blue"></i><span> Mapa OpenStreetMap</span>
-			            <span id="osmMenuCheck" class="pull-right-container" style="display:none">
+			            <span id="osmMenuCheck" class="pull-right-container">
 			              <small class="label pull-right bg-green"> &nbsp </small>
 			            </span>	 
 					</a>

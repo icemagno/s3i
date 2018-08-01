@@ -1,4 +1,5 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html manifest="">
@@ -44,7 +45,7 @@
         <!-- /.sidebar -->
       </aside>
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div style="position:relative" class="content-wrapper">
         <section  class="content container-fluid">
           <div id="world-map" style="position:absolute; top:0px;left:0px;width:100%;height: 100%"></div>
           <div class="row">
@@ -57,24 +58,19 @@
                         <div class="box-body">
 							
 						    <div class="mailbox-controls">
-						      <!-- Check all button -->
-						      <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
-						      <div class="btn-group">
-						        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-						        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-						        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-						      </div>
-						      <!-- /.btn-group -->
-						      <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-						      <div class="pull-right">
-						        
-						        <div class="btn-group">
-						          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-						          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-						        </div>
-						        <!-- /.btn-group -->
-						      </div>
-						      <!-- /.pull-right -->
+						    	<a href="javascript:drawFireArea();" class="btn btn-default btn-sm ad-click-event">
+									<img src="resources/img/fire.png" width="18">
+								</a>	
+
+						    	<a href="javascript:editFireArea();" class="btn btn-default btn-sm ad-click-event">
+									<img src="resources/img/pencil.png" width="18">
+								</a>	
+
+						    	<a href="javascript:deleteFireArea();" class="btn btn-default btn-sm ad-click-event">
+									<img src="resources/img/delete.png" width="18">
+								</a>	
+
+
 						    </div>						
 							
                         </div>
@@ -172,11 +168,17 @@
       <!-- Magno -->
       <script src="/resources/sockjs.min.js"></script>
       <script src="/resources/stomp.min.js"></script>
+      <script src="/resources/draw.js"></script>  
       <script src="/resources/script.js"></script>  
       <script src="${midasLocation}/bower_components/ckeditor/ckeditor.js"></script>
       
 	  <!-- Layer Control -->
 	  <script type="text/javascript" src="/resources/layers.js"></script>
+    
+      <security:authorize access="hasRole('ROLE_FIREMAN')">
+      		<script>isAFireman();</script>
+      </security:authorize>	
+    
     
   </body>
 
