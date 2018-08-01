@@ -21,8 +21,7 @@ public class BasicController {
 					.getPrincipal();
 		
 		String userName = userDetail.getUsername();
-		User user = userRepository.findByName(userName);
-	    return user;
+	    return userRepository.findByName(userName);
 	    
 	}	
 		

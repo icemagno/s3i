@@ -7,9 +7,25 @@
       
       
         <li class="header">MENU PRINCIPAL</li>
+
+
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-flash"></i><span>Emergência</span>
+            <i class="fa fa-fire"></i><span>Emergência</span>
+            <span id="solucion-count" class="pull-right-container">
+            </span>
+          </a>
+          <ul class="treeview-menu" id="emerg-menu">
+	            <li>
+	            	<a href="javascript:toggleFireToolbar();"><i class="fa fa-circle-o text-white"></i><span> Áreas de Incêndio</span></a>
+	            </li>
+          </ul>
+        </li>
+
+        
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-flash"></i><span>Componentes</span>
             <span id="solucion-count" class="pull-right-container">
             </span>
           </a>
@@ -36,10 +52,19 @@
 				<li>
 					<a href="javascript:toggleOsm();"><i class="fa fa-circle-o text-blue"></i><span> Mapa OpenStreetMap</span>
 			            <span id="osmMenuCheck" class="pull-right-container">
-			              <small class="label pull-right bg-green"> &nbsp </small>
+			              <small class="label pull-right bg-green"> <i class="far fa-check-square text-blue"></i> </small>
 			            </span>	 
 					</a>
-				</li>			                       	    
+				</li>
+				
+				<li>
+					<a href="javascript:toggleOsm();"><i class="fa fa-circle-o text-blue"></i><span> Imagem Satélite</span>
+			            <span id="sateliteMenuCheck" class="pull-right-container" style="display:none">
+			              <small class="label pull-right bg-green"> <i class="far fa-check-square text-blue"></i> </small>
+			            </span>	 
+					</a>
+				</li>					
+							                       	    
 				<li>
 					<a href="javascript:toggleApa();"><i class="fa fa-circle-o text-blue"></i><span> Áreas de Proteção</span>
 			            <span id="apaMenuCheck" class="pull-right-container" style="display:none">
@@ -70,6 +95,7 @@
 				<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> Magirus</span></a></li>			                       	    
 				<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> UTI</span></a></li>			                       	    
 				<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> Apoio</span></a></li>			                       	    
+				<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> Drone</span></a></li>			                       	    
 				<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> Pessoal (HelmetCam)</span></a></li>	
 		  </ul>
         </li>

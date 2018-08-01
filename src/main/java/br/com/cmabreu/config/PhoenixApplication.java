@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = {"br.com.cmabreu.repository"})
 @EntityScan( basePackages = {"br.com.cmabreu.model"} )
-public class EditorApplication {
+public class PhoenixApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EditorApplication.class, args);
+		SpringApplication.run(PhoenixApplication.class, args);
 	}
 }

@@ -20,3 +20,9 @@ function toggleApa() {
 	apaLayer.setVisible( apaVisible );
 	$("#apaMenuCheck").toggle();
 }
+
+function toggleSatelite() {
+	sateliteVisible = !sateliteVisible;
+	sateliteLayer.setVisible( sateliteVisible );
+	$("#sateliteMenuCheck").toggle();
+}

@@ -2,6 +2,7 @@ var stompClient = null;
 var textChanged = false;
 var myModule = null;
 var theMap = null;
+var globalUser = null;
 
 /* --------  Camadas ----------- */
 var hidranteLayer = null;
@@ -17,46 +18,68 @@ function connect() {
     
     stompClient.debug = null;
 	stompClient.connect({}, function(frame) {
+		
 		stompClient.subscribe('/queue/notify', function(notification) {
 			processData( JSON.parse( notification.body ) );
 		});
+		
+		stompClient.subscribe('/queue/fireman', function(notification) {
+			processFireman( JSON.parse( notification.body ) );
+		});
+		
+		stompClient.subscribe('/queue/admin', function(notification) {
+			processAdmin( JSON.parse( notification.body ) );
+		});
+		
+		
 	});    
     
 }
 
+function toggleFireToolbar() {
+	$("#fireToolbar").toggle();
+}
+
 function processData( data ) {
-	// Object { modules: Array[2], header: Object, footer: Object }
-	// modules[x].content /// header.content /// footer.content
-	// CKEDITOR.instances.editor1.setData('<p font color="red">All ok here!!</p>');
-	var docContent = "<div style='margin-bottom:5px;width:100%;border-bottom: 1px dotted black'>" + data.header.content + "</div>";
+	console.log( data );
+}
+
+function processFireman( data ) {
+	console.log( "New Fireman !! "); 
+	console.log( data );
+}
+
+function processAdmin( data ) {
+	console.log( "New admin !! "); 
+	console.log( data );
 	
-	for( x=0; x < data.modules.length; x++ ) {
-		docContent = docContent + '<h4>' + data.modules[x].title + '</h4>';
-		docContent = docContent + data.modules[x].content;
-	}
+	/*
+	var thing = new ol.geom.Point([0,0]);
+	var featurething = new ol.Feature({
+	    name: "Thing",
+	    geometry: thing
+	});
+	this.vectorSource.addFeature( featurething ); 	
+	*/	
 	
-	docContent = docContent + "<div style='margin-top:5px;width:100%;border-top: 1px dotted black'>" + data.footer.content + "</div>";
-	
-	var div = $("#documentPreview");
-	div.fadeOut('fast', function() {
-		div.html( docContent );
-		div.fadeIn('fast');
-	});	
 	
 }
+
 
 function onTextChange() {
 	textChanged = true;
 }
 
-function initCheck() {
-	setInterval(function(){ 
-		if( !textChanged ) return;
-		var text = CKEDITOR.instances.editor1.getData();
-		myModule.content = text;
-		stompClient.send( "/document.update", {}, JSON.stringify( myModule ) );
-		textChanged = false;
-	}, 5000);
+function initCheck( position ) {
+	var consumer = {};
+	consumer.position = position; 
+	consumer.user = globalUser;
+	if( globalUser.roleName === 'ROLE_ADMIN' ) {
+		stompClient.send( "/notify.admin", {}, JSON.stringify( consumer ) );
+	}
+	if( globalUser.roleName === 'ROLE_FIREMAN' ) {
+		stompClient.send( "/notify.fireman", {}, JSON.stringify( consumer ) );	
+	}
 }
 
 function updateScale() {
@@ -140,7 +163,7 @@ function startMap() {
 	
 	
 	theMap = new ol.Map({
-		layers: [ /* sateliteLayer, */ osmLayer, mapserver, apaLayer, hidranteLayer ],
+		layers: [ sateliteLayer, osmLayer, mapserver, apaLayer, hidranteLayer ],
 		target: 'world-map',
 		renderer: 'canvas',
 		controls : [],
@@ -152,18 +175,16 @@ function startMap() {
 
 function initSystem() {
 	
-	// Desabilitado por enquanto
-	return true;
-	
     $.ajax({
-        url: '/module',
+        url: '/userdetails',
         dataType: 'json',
-        success: function (obj, textstatus) {
-        	myModule = obj;
+        success: function (user, textstatus) {
+        	globalUser = user;
         	connect();
-        	initCheck();
+        	getLocation();
         }
     });
+	
 }
 
 function drawFireArea() {
@@ -180,19 +201,10 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    //x.innerHTML = "Latitude: " + position.coords.latitude + 
-    //"<br>Longitude: " + position.coords.longitude;
-    
-    console.log( position.coords.latitude + " " + position.coords.longitude );
-    
+	initCheck( [position.coords.latitude, position.coords.longitude] );
 }
 
-function isAFireman() {
-	console.log( 'Fireman !!' );
-}
-
-initSystem();
 startMap();
+initSystem();
 initAirTraffic();
-getLocation();
 

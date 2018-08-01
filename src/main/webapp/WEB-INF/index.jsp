@@ -53,7 +53,7 @@
           
                   <div class="col-sm-3">
                   
-                     <div class="box box-danger">
+                     <div class="box box-danger" id="fireToolbar" style="display:none">
                         <!-- Caixa da Esquerda  -->
                         <div class="box-body">
 							
@@ -78,6 +78,7 @@
                      
                      
 <!-- ************************************************************************** -->
+<!-- 
                      <div class="box box-primary">
                         <div class="box-header with-border">
                            <h3 class="box-title">[HelmetCam] 675 SD Henrique</h3>
@@ -88,6 +89,7 @@
 	                        </div>
                         </div>
                      </div>
+-->
 <!-- ************************************************************************** -->
 
                   </div>
