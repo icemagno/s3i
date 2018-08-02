@@ -1,5 +1,6 @@
 var usersSource = null;
 var userLayer = null;
+var selectUser = null;
 
 function usersStyleFunction( feature, resolution ) {
 	var props = feature.getProperties();
@@ -118,7 +119,7 @@ function addUserToMap( user ) {
 		});
 	}
 	
-	
+	return featurething;
 }
 
 function deleteUser( userName ) {
@@ -139,5 +140,6 @@ function initUserLayer() {
 		style: usersStyleFunction
 	});	
 	theMap.addLayer( userLayer );
+	
 }
 

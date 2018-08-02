@@ -151,22 +151,22 @@ function startMap() {
 	
 	theMap.on('singleclick', function(evt) {
 	    var feature = theMap.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
-	        console.log( "Hit a layer" );
+	        console.log( "hit a layer" );
 	        return feature;
 	    });
 	    if (feature) {
 	    	var props = feature.getProperties();
 	    	
 	    	if( props.roleName === 'ROLE_DRONE' ) {
-	    		console.log('hit');
+	    		console.log('hit a drone');
 	    		
 	    		$("#droneCam").show(100);
+	    		$("#droneCamTitle").text( '[Drone] ' + props.fullName );
 	    	}	
 	        
 	    }
 	});	
 	
-
 	
 	theMap.on('pointermove', function (evt) {
 		if (evt.dragging) {
@@ -178,8 +178,6 @@ function startMap() {
 		theMap.getTargetElement().style.cursor = hit ? 'pointer' : '';
 	});	
 
-
-	
 	
 }
 
@@ -240,7 +238,7 @@ function initCheck( position ) {
 }
 
 $( document ).ready(function() {
-	$("#contentWraper").append('<div id="world-map" style="position:absolute; top:0px;left:0px;width:100%;height:100%;"></div>');
+	//$("#contentWraper").append('<div id="world-map" style="position:absolute; top:0px;left:0px;width:100%;height:100%;"></div>');
 	connect();
 });
 
@@ -250,8 +248,20 @@ function fakeDrone() {
 	var data = {};
 	data.position = [39.614,-6.954];
 	data.user = {name: "ASD-786G", email: "drone", fullName: "ASD-786G", roleName: "ROLE_DRONE"};
-	addUserToMap( data );
+	
+	var item = addUserToMap( data );
+	
+	setInterval(function(){ 
+		var modifiedCoordinate = item.getGeometry().getCoordinates();
+		modifiedCoordinate[1] = modifiedCoordinate[1] + 200;
+		item.getGeometry().setCoordinates( modifiedCoordinate );
+	}, 500);
+	
+	
 }
+
+
+
 
 
 

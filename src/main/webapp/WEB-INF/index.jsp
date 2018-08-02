@@ -43,15 +43,33 @@
       <div id="contentWraper" style="position:relative" class="content-wrapper">
       	
         <section  class="content container-fluid">
-          
+          <!-- https://pt.stackoverflow.com/questions/182188/qual-a-diferenc%C3%A7a-entre-col-lg-col-md-e-col-sm-no-bootstrap   -->
           <div class="row">
+
+<!-- ************************************************************************** -->
           
-                  <div class="col-sm-3">
+                  <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 "  >
                   
-                     <div class="box box-danger" id="fireToolbar" style="display:none;z-index:99999">
-                        <!-- Caixa da Esquerda  -->
-                        <div class="box-body">
-							
+                     <div class="box box-primary"  >
+                        <div class="box-header with-border">
+                           <h3 id="droneCamTitle" class="box-title">&nbsp;</h3>
+                        </div>
+                        <div class="box-body" style="background-color:white">
+	                        <div id="droneCam" class="embed-responsive embed-responsive-4by3" style="display:none">
+	                        	<iframe src="https://www.youtube.com/embed/7J02-mB2Qe8?rel=0&mute=1&controls=0&showinfo=0&autoplay=1" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+	                        </div>
+                        </div>
+                     </div>
+
+<!-- ************************************************************************** -->
+
+                  </div>
+
+                  <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 ">
+                  
+                     <div class="box box-success" id="mapBox">
+                        <div class="box-header with-border">
+                           
 						    <div class="mailbox-controls">
 						    	<a href="javascript:drawFireArea();" class="btn btn-default btn-sm ad-click-event">
 									<img src="resources/img/areaav.png" width="18">
@@ -64,32 +82,18 @@
 						    	<a href="javascript:deleteFireArea();" class="btn btn-default btn-sm ad-click-event">
 									<img src="resources/img/delete.png" width="18">
 								</a>	
-
-
-						    </div>						
-							
+						    </div>	                           
+                           
+                           
+                        </div>                     
+                     
+                        <div class="box-body">
+                        	<div id="world-map" style="width:100%;height:115%;"></div>
                         </div>
                      </div>
                      
+				  </div>
                      
-<!-- ************************************************************************** -->
-
-                     <div class="box box-primary" id="droneCam" style="display:none;z-index:99999">
-                        <div class="box-header with-border">
-                           <h3 class="box-title">[Drone] ASD-786G</h3>
-                        </div>
-                        <div id="videoPreview" class="box-body" style="background-color:white">
-	                        <div class="embed-responsive embed-responsive-4by3">
-	                        <iframe src="https://www.youtube.com/embed/7J02-mB2Qe8?rel=0&mute=1&controls=0&showinfo=0&autoplay=1" frameborder="0" allow="autoplay; encrypted-media"></iframe>
-	                        </div>
-                        </div>
-                     </div>
-
-<!-- ************************************************************************** -->
-
-                  </div>
-
-
 
           </div>
         </section>

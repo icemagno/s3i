@@ -76,9 +76,24 @@ function initDraw() {
 	drawInteraction.on('drawend', function( evt ){
 	    var drawedFeature =  evt.feature;
 	    
-	    //console.log( drawedFeature );
-	    
 	    dispose();
+	    
+	    /*
+	    selectUser = new ol.interaction.Select({
+	        condition: ol.events.condition.singleClick,
+	        toggleCondition: ol.events.condition.shiftKeyOnly,    	
+	    	layers: [drawLayer],
+	        // style: overlayStyle
+		});	
+	    theMap.addInteraction( selectUser );
+	    
+	    var modify = new new ol.interaction.Modify({
+	        features: selectUser.getFeatures(),
+	        //style: overlayStyle,
+		});    
+	    theMap.addInteraction(modify);	    
+	    */
+	    
 	});	
 	
 	theMap.addInteraction( drawInteraction );
