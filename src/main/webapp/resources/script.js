@@ -2,6 +2,7 @@ var stompClient = null;
 var textChanged = false;
 var myModule = null;
 var theMap = null;
+var theView = null;
 var globalUser = null;
 
 /* --------  Camadas ----------- */
@@ -31,6 +32,7 @@ function connect() {
 			processAdmin( JSON.parse( notification.body ) );
 		});
 		
+		initSystem();
 		
 	});    
     
@@ -45,41 +47,16 @@ function processData( data ) {
 }
 
 function processFireman( data ) {
-	console.log( "New Fireman !! "); 
-	console.log( data );
+	addUserToMap( data );
 }
 
 function processAdmin( data ) {
-	console.log( "New admin !! "); 
-	console.log( data );
-	
-	/*
-	var thing = new ol.geom.Point([0,0]);
-	var featurething = new ol.Feature({
-	    name: "Thing",
-	    geometry: thing
-	});
-	this.vectorSource.addFeature( featurething ); 	
-	*/	
-	
-	
+	addUserToMap( data );
 }
 
 
 function onTextChange() {
 	textChanged = true;
-}
-
-function initCheck( position ) {
-	var consumer = {};
-	consumer.position = position; 
-	consumer.user = globalUser;
-	if( globalUser.roleName === 'ROLE_ADMIN' ) {
-		stompClient.send( "/notify.admin", {}, JSON.stringify( consumer ) );
-	}
-	if( globalUser.roleName === 'ROLE_FIREMAN' ) {
-		stompClient.send( "/notify.fireman", {}, JSON.stringify( consumer ) );	
-	}
 }
 
 function updateScale() {
@@ -88,7 +65,7 @@ function updateScale() {
 
 function startMap() {
 	
-	var theView = new ol.View({
+	theView = new ol.View({
 		center: ol.proj.fromLonLat([-6.954,39.614]),
 		zoom: 7,
 	    minZoom: 2,
@@ -141,7 +118,7 @@ function startMap() {
 	/*  TESTE   */ 
 	//http://epic-webgis-portugal.isa.ulisboa.pt/wms/epic?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities
 	//https://nowcoast.noaa.gov/arcgis/services/nowcoast/sat_meteo_imagery_time/MapServer/WMSServer
-	
+	/*
 	epic = new ol.layer.Tile({
 		source: new ol.source.TileWMS({
 			url: 'https://nowcoast.noaa.gov/arcgis/services/nowcoast/sat_meteo_imagery_time/MapServer/WmsServer',
@@ -149,26 +126,59 @@ function startMap() {
 		})
 	});	
 	epic.setVisible( true );
-	
+	*/
 	/* ------------ */	
 	
 	/* MapServer */
 	// https://nowcoast.noaa.gov/arcgis/services/nowcoast/sat_meteo_imagery_time/MapServer/
+	/*
 	var mapserver = new ol.layer.Tile({
 		source: new ol.source.XYZ({
 			url: 'https://nowcoast.noaa.gov/arcgis/rest/services/nowcoast/sat_meteo_imagery_time/MapServer/tile/{z}/{y}/{x}'
 		})
-	});	
+	})
+	*/;	
 	/* ------------ */	
 	
 	
 	theMap = new ol.Map({
-		layers: [ sateliteLayer, osmLayer, mapserver, apaLayer, hidranteLayer ],
+		layers: [ osmLayer, sateliteLayer, apaLayer, hidranteLayer ],
 		target: 'world-map',
 		renderer: 'canvas',
 		controls : [],
 		view: theView
 	});	
+	
+	theMap.on('singleclick', function(evt) {
+	    var feature = theMap.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+	        console.log( "Hit a layer" );
+	        return feature;
+	    });
+	    if (feature) {
+	    	var props = feature.getProperties();
+	    	
+	    	if( props.roleName === 'ROLE_DRONE' ) {
+	    		console.log('hit');
+	    		
+	    		$("#droneCam").show(100);
+	    	}	
+	        
+	    }
+	});	
+	
+
+	
+	theMap.on('pointermove', function (evt) {
+		if (evt.dragging) {
+			return;
+		}
+		var hit = theMap.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
+			return true;
+		});
+		theMap.getTargetElement().style.cursor = hit ? 'pointer' : '';
+	});	
+
+
 	
 	
 }
@@ -180,11 +190,23 @@ function initSystem() {
         dataType: 'json',
         success: function (user, textstatus) {
         	globalUser = user;
-        	connect();
+        	
         	getLocation();
+        	
+        	startMap();
+        	initAirTraffic();
+        	initUserLayer();
+
+        	setTimeout(function(){
+        		fakeDrone(); 
+        	}, 10000);        	
+        	
+        	
         }
     });
 	
+    
+    
 }
 
 function drawFireArea() {
@@ -204,7 +226,38 @@ function showPosition(position) {
 	initCheck( [position.coords.latitude, position.coords.longitude] );
 }
 
-startMap();
-initSystem();
-initAirTraffic();
+function initCheck( position ) {
+	var consumer = {};
+	consumer.position = position; 
+	consumer.user = globalUser;
+	if( globalUser.roleName === 'ROLE_ADMIN' ) {
+		stompClient.send( "/notify.admin", {}, JSON.stringify( consumer ) );
+	}
+	if( globalUser.roleName === 'ROLE_FIREMAN' ) {
+		stompClient.send( "/notify.fireman", {}, JSON.stringify( consumer ) );	
+	}
+	
+}
+
+$( document ).ready(function() {
+	$("#contentWraper").append('<div id="world-map" style="position:absolute; top:0px;left:0px;width:100%;height:100%;"></div>');
+	connect();
+});
+
+// ------------------------ TESTE -------------------------------------------------------------------------
+
+function fakeDrone() {
+	var data = {};
+	data.position = [39.614,-6.954];
+	data.user = {name: "ASD-786G", email: "drone", fullName: "ASD-786G", roleName: "ROLE_DRONE"};
+	addUserToMap( data );
+}
+
+
+
+
+
+
+
+
 

@@ -8,7 +8,7 @@
       
         <li class="header">MENU PRINCIPAL</li>
 
-
+		<!-- 
         <li class="treeview">
           <a href="#">
             <i class="fa fa-fire"></i><span>Emergência</span>
@@ -21,7 +21,7 @@
 	            </li>
           </ul>
         </li>
-
+ 		-->
         
         <li class="treeview">
           <a href="#">
@@ -52,15 +52,15 @@
 				<li>
 					<a href="javascript:toggleOsm();"><i class="fa fa-circle-o text-blue"></i><span> Mapa OpenStreetMap</span>
 			            <span id="osmMenuCheck" class="pull-right-container">
-			              <small class="label pull-right bg-green"> <i class="far fa-check-square text-blue"></i> </small>
+			              <small class="label pull-right bg-green"> <i class="fa fa-check-square text-blue"></i> </small>
 			            </span>	 
 					</a>
 				</li>
 				
 				<li>
-					<a href="javascript:toggleOsm();"><i class="fa fa-circle-o text-blue"></i><span> Imagem Satélite</span>
+					<a href="javascript:toggleSatelite();"><i class="fa fa-circle-o text-blue"></i><span> Imagem Satélite</span>
 			            <span id="sateliteMenuCheck" class="pull-right-container" style="display:none">
-			              <small class="label pull-right bg-green"> <i class="far fa-check-square text-blue"></i> </small>
+			              <small class="label pull-right bg-green"> <i class="fa fa-check-square text-blue"></i> </small>
 			            </span>	 
 					</a>
 				</li>					

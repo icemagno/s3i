@@ -3,16 +3,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html manifest="">
-  <!-- PAGE HEAD -->
   <jsp:include page="head.jsp" />
-  <style type="text/css">
-    /* show the move cursor as the user moves the mouse over the panel header.*/
-    #draggablePanelList  {
-    cursor: move;
-    }
-  </style>
+
   <body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
     <div class="wrapper">
+    
       <!-- Main Header -->
       <header class="main-header">
         <!-- PAGE LOGO -->
@@ -45,21 +40,21 @@
         <!-- /.sidebar -->
       </aside>
       <!-- Content Wrapper. Contains page content -->
-      <div style="position:relative" class="content-wrapper">
+      <div id="contentWraper" style="position:relative" class="content-wrapper">
+      	
         <section  class="content container-fluid">
-          <div id="world-map" style="position:absolute; top:0px;left:0px;width:100%;height: 100%"></div>
-          <div class="row">
           
+          <div class="row">
           
                   <div class="col-sm-3">
                   
-                     <div class="box box-danger" id="fireToolbar" style="display:none">
+                     <div class="box box-danger" id="fireToolbar" style="display:none;z-index:99999">
                         <!-- Caixa da Esquerda  -->
                         <div class="box-body">
 							
 						    <div class="mailbox-controls">
 						    	<a href="javascript:drawFireArea();" class="btn btn-default btn-sm ad-click-event">
-									<img src="resources/img/fire.png" width="18">
+									<img src="resources/img/areaav.png" width="18">
 								</a>	
 
 						    	<a href="javascript:editFireArea();" class="btn btn-default btn-sm ad-click-event">
@@ -78,18 +73,18 @@
                      
                      
 <!-- ************************************************************************** -->
-<!-- 
-                     <div class="box box-primary">
+
+                     <div class="box box-primary" id="droneCam" style="display:none;z-index:99999">
                         <div class="box-header with-border">
-                           <h3 class="box-title">[HelmetCam] 675 SD Henrique</h3>
+                           <h3 class="box-title">[Drone] ASD-786G</h3>
                         </div>
-                        <div id="videoPreview" class="box-body" style="background.color:white">
+                        <div id="videoPreview" class="box-body" style="background-color:white">
 	                        <div class="embed-responsive embed-responsive-4by3">
-	                        <iframe src="https://www.youtube.com/embed/DX9dTLeXSO8?rel=0&mute=1&controls=0&showinfo=0&autoplay=1" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+	                        <iframe src="https://www.youtube.com/embed/7J02-mB2Qe8?rel=0&mute=1&controls=0&showinfo=0&autoplay=1" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 	                        </div>
                         </div>
                      </div>
--->
+
 <!-- ************************************************************************** -->
 
                   </div>
@@ -152,15 +147,12 @@
               </li>
             </ul>
           </div>
-          <!-- /.tab-pane -->
         </div>
       </aside>
-      <!-- /.control-sidebar -->
-      <!-- Add the sidebar's background. This div must be placed
-        immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
     </div>
-    <!-- ./wrapper -->
+    
+    
     <!-- LOAD JAVASCRIPT FILES -->
     <jsp:include page="requiredscripts.jsp" />
     
@@ -171,16 +163,10 @@
       <script src="/resources/sockjs.min.js"></script>
       <script src="/resources/stomp.min.js"></script>
       <script src="/resources/draw.js"></script>  
+      <script src="/resources/users.js"></script>  
+	  <script src="/resources/layers.js"></script>
+	  
       <script src="/resources/script.js"></script>  
-      <script src="${midasLocation}/bower_components/ckeditor/ckeditor.js"></script>
-      
-	  <!-- Layer Control -->
-	  <script type="text/javascript" src="/resources/layers.js"></script>
-    
-      <security:authorize access="hasRole('ROLE_FIREMAN')">
-      		<script>isAFireman();</script>
-      </security:authorize>	
-    
     
   </body>
 

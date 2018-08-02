@@ -33,5 +33,7 @@
 <!-- OpenLayers -->
 <script type="text/javascript" src="/resources/ol.js"></script>
 
+<!-- Notify -->
+<script type="text/javascript" src="/resources/bootstrap-notify.js"></script>
 	
 	

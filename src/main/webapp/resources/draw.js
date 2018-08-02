@@ -18,7 +18,9 @@ function makePattern (color, ptrHDist, ptrVDist, ptrLength, ptrHeight, ptrWidth)
 
 
 function initDraw() {
-	drawSource = new ol.source.Vector();
+	drawSource = new ol.source.Vector({
+		projection: theView.getProjection()
+	});
 
 	var polygonStyle = new ol.style.Style({
 		fill: new ol.style.Fill({
@@ -26,6 +28,12 @@ function initDraw() {
 		}),
 	});	
 	
+	
+	var fullBackStyle = new ol.style.Style({
+		fill: new ol.style.Fill({
+			color: '#f90404',
+		}),
+	});		
 	
 	var lightStroke = new ol.style.Style({
 		  stroke: new ol.style.Stroke({
@@ -67,7 +75,9 @@ function initDraw() {
 	
 	drawInteraction.on('drawend', function( evt ){
 	    var drawedFeature =  evt.feature;
-	    console.log( drawedFeature );
+	    
+	    //console.log( drawedFeature );
+	    
 	    dispose();
 	});	
 	
