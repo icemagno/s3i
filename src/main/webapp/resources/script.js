@@ -179,6 +179,16 @@ function startMap() {
 	});	
 
 	
+
+	$( "#sidebarButton" ).click(function() {
+		console.log('xzcxz');
+		setTimeout( function() { 
+			theMap.updateSize();
+		}, 200);
+	});	
+	
+	
+	
 }
 
 function initSystem() {
@@ -208,19 +218,47 @@ function initSystem() {
 }
 
 function drawFireArea() {
-	initDraw();
+	if( drawing ) {
+		dispose();
+	} else {
+		initDraw();
+	}
 }
 
 //var x = document.getElementById("demo");
 function getLocation() {
+	var options = {
+	  enableHighAccuracy: true,
+	  timeout: 5000,
+	  maximumAge: 0
+	};	
+	
+	
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(showPosition, 
+    		function() {
+    	
+	    		$.notify({
+	    			title : '',
+	    			message: 'Erro ao descobrir sua localização' 
+	    		},{
+	    			type: 'danger',
+	    			delay : 3000,
+	    			animate: {
+	    				enter: 'animated fadeInRight',
+	    				exit: 'animated fadeOutRight'
+	    			}			
+	    		});        	
+        	
+    		}, options 
+        );
     } else {
         //x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 
 function showPosition(position) {
+	console.log( position );
 	initCheck( [position.coords.latitude, position.coords.longitude] );
 }
 
@@ -259,7 +297,6 @@ function fakeDrone() {
 	
 	
 }
-
 
 
 

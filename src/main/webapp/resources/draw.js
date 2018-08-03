@@ -1,6 +1,7 @@
 var drawSource = null;
 var drawVector = null;
 var drawInteraction = null;
+var drawing = false;
 
 function makePattern (color, ptrHDist, ptrVDist, ptrLength, ptrHeight, ptrWidth) {
 	var newColor = 'rgb(' + color[0] + ',' + color[1] + ',' + color[2] + ')';
@@ -18,6 +19,8 @@ function makePattern (color, ptrHDist, ptrVDist, ptrLength, ptrHeight, ptrWidth)
 
 
 function initDraw() {
+	theMap.updateSize();
+	
 	drawSource = new ol.source.Vector({
 		projection: theView.getProjection()
 	});
@@ -97,11 +100,14 @@ function initDraw() {
 	});	
 	
 	theMap.addInteraction( drawInteraction );
+	
+	drawing = true;
 
 }
 
 function dispose() {
 	theMap.removeInteraction( drawInteraction );
+	drawing = false;
 }
 
 

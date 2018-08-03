@@ -46,6 +46,8 @@ function usersStyleFunction( feature, resolution ) {
 
 function addUserToMap( user ) {
 	
+	console.log( user );
+	
 	if( globalUser.name == user.user.name ) {
 		return;
 	}

@@ -14,7 +14,11 @@
         <jsp:include page="pagelogo.jsp" />
         <!-- Header Navbar -->
         <nav class="navbar navbar-static-top" role="navigation">
-          <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          
+          
+          <a href="#" id="sidebarButton" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          
+          
           <span class="sr-only">Mudar Navegação</span>
           </a>
           <!-- Navbar Right Menu -->
@@ -40,22 +44,40 @@
         <!-- /.sidebar -->
       </aside>
       <!-- Content Wrapper. Contains page content -->
-      <div id="contentWraper" style="position:relative" class="content-wrapper">
+      <div id="contentWraper" class="content-wrapper">
       	
         <section  class="content container-fluid">
           <!-- https://pt.stackoverflow.com/questions/182188/qual-a-diferenc%C3%A7a-entre-col-lg-col-md-e-col-sm-no-bootstrap   -->
-          <div class="row">
+          <div id="theRow" class="row">
 
 <!-- ************************************************************************** -->
           
                   <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 "  >
                   
-                     <div class="box box-primary"  >
+                     <div class="box box-danger"  >
+                        <div class="box-body" style="background-color:white">
+						    <div class="mailbox-controls">
+						    	<a href="javascript:drawFireArea();" class="btn btn-default btn-sm ad-click-event">
+									<img src="resources/img/areaav.png" width="15">
+								</a>	
+
+						    	<a href="javascript:editFireArea();" class="btn btn-default btn-sm ad-click-event">
+									<img src="resources/img/pencil.png" width="15">
+								</a>	
+
+						    	<a href="javascript:deleteFireArea();" class="btn btn-default btn-sm ad-click-event">
+									<img src="resources/img/delete.png" width="15">
+								</a>	
+						    </div>	                           
+                        </div>
+                     </div>
+                  
+                     <div class="box box-primary" id="droneCam" style="display:none" >
                         <div class="box-header with-border">
                            <h3 id="droneCamTitle" class="box-title">&nbsp;</h3>
                         </div>
                         <div class="box-body" style="background-color:white">
-	                        <div id="droneCam" class="embed-responsive embed-responsive-4by3" style="display:none">
+	                        <div  class="embed-responsive embed-responsive-4by3" >
 	                        	<iframe src="https://www.youtube.com/embed/7J02-mB2Qe8?rel=0&mute=1&controls=0&showinfo=0&autoplay=1" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 	                        </div>
                         </div>
@@ -66,32 +88,11 @@
                   </div>
 
                   <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 ">
-                  
                      <div class="box box-success" id="mapBox">
-                        <div class="box-header with-border">
-                           
-						    <div class="mailbox-controls">
-						    	<a href="javascript:drawFireArea();" class="btn btn-default btn-sm ad-click-event">
-									<img src="resources/img/areaav.png" width="18">
-								</a>	
-
-						    	<a href="javascript:editFireArea();" class="btn btn-default btn-sm ad-click-event">
-									<img src="resources/img/pencil.png" width="18">
-								</a>	
-
-						    	<a href="javascript:deleteFireArea();" class="btn btn-default btn-sm ad-click-event">
-									<img src="resources/img/delete.png" width="18">
-								</a>	
-						    </div>	                           
-                           
-                           
-                        </div>                     
-                     
-                        <div class="box-body">
-                        	<div id="world-map" style="width:100%;height:115%;"></div>
+                        <div class="box-body" >
+                        	<div id="world-map"  style="height: calc(100vh - 195px); width: 100%;" ></div>
                         </div>
                      </div>
-                     
 				  </div>
                      
 
