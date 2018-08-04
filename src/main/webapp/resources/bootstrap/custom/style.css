@@ -1,0 +1,25 @@
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+.pointer {
+	cursor : pointer;
+}
+
+
+.bg {
+    background-image: url("img/canvas.jpg");
+    background-color : #FFFFFF !important;
+}
+
+
+.login-box, .register-box {
+    width: 360px;
+    margin: 50px auto;
+}
