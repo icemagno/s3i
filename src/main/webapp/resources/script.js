@@ -4,6 +4,8 @@ var myModule = null;
 var theMap = null;
 var theView = null;
 var globalUser = null;
+var selectedFeature = null;
+var modifyInteraction = null;
 
 /* --------  Camadas ----------- */
 var hidranteLayer = null;
@@ -140,7 +142,11 @@ function startMap() {
 	*/;	
 	/* ------------ */	
 	
-	
+	osmLayer.set('layerName', 'osmLayer');
+	sateliteLayer.set('layerName', 'sateliteLayer');
+	apaLayer.set('layerName', 'apaLayer');
+	hidranteLayer.set('layerName', 'hidranteLayer');
+
 	theMap = new ol.Map({
 		layers: [ osmLayer, sateliteLayer, apaLayer, hidranteLayer ],
 		target: 'world-map',
@@ -149,36 +155,47 @@ function startMap() {
 		view: theView
 	});	
 	
+	// Responde a um clique no mapa em algum elemento
 	theMap.on('singleclick', function(evt) {
+		var layerName = null;
+		selectedFeature = null;
+		
 	    var feature = theMap.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
-	        console.log( "hit a layer" );
+	        if( layer )	layerName = layer.get('layerName');
 	        return feature;
 	    });
+	    
 	    if (feature) {
 	    	var props = feature.getProperties();
+
+	    	// Uma área de incendio?
+	    	if ( layerName === 'drawLayer' ) {
+	    		//
+	    	}
 	    	
-	    	if( props.roleName === 'ROLE_DRONE' ) {
-	    		console.log('hit a drone');
-	    		
-	    		$("#droneCam").show(100);
-	    		$("#droneCamTitle").text( '[Drone] ' + props.fullName );
-	    	}	
+	    	if ( layerName === 'userLayer' ) {
+	    		// Um drone ?
+		    	if( props.roleName === 'ROLE_DRONE' ) {
+		    		$("#droneCam").show(100);
+		    		$("#droneCamTitle").text( '[Drone] ' + props.fullName );
+		    	}
+		    	
+	    	}
 	        
 	    }
+	    
 	});	
-	
 	
 	theMap.on('pointermove', function (evt) {
 		if (evt.dragging) {
 			return;
 		}
 		var hit = theMap.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
+			
 			return true;
 		});
 		theMap.getTargetElement().style.cursor = hit ? 'pointer' : '';
 	});	
-
-	
 
 	$( "#sidebarButton" ).click(function() {
 		console.log('xzcxz');
@@ -187,9 +204,39 @@ function startMap() {
 		}, 200);
 	});	
 	
+}
+
+
+function editFireArea() {
+	var features = drawSource.getFeatures();
 	
+	if( features.length == 0 ) return;
+	
+	if( editing ) {
+		theMap.removeInteraction( modifyInteraction );
+	    theMap.removeInteraction( selectArea );		
+		modifyInteraction = null;
+		selectArea = null;
+		editing = false;
+		return;
+	} 
+	
+	editing = true;
+	
+    selectArea = new ol.interaction.Select({
+    	layers: [drawLayer],
+	});	
+	
+    modifyInteraction = new ol.interaction.Modify({
+        features: selectArea.getFeatures(),
+        //style: overlayStyle,
+	});    
+
+    theMap.addInteraction( selectArea );		
+    theMap.addInteraction( modifyInteraction );	    
 	
 }
+
 
 function initSystem() {
 	
@@ -204,6 +251,7 @@ function initSystem() {
         	startMap();
         	initAirTraffic();
         	initUserLayer();
+        	initDraw();
 
         	setTimeout(function(){
         		fakeDrone(); 
@@ -221,9 +269,27 @@ function drawFireArea() {
 	if( drawing ) {
 		dispose();
 	} else {
-		initDraw();
+		startDrawing();
 	}
 }
+
+
+function niy() {
+	
+	$.notify({
+		title : '',
+		message: 'Não Implementado Ainda' 
+	},{
+		type: 'success',
+		delay : 3000,
+		animate: {
+			enter: 'animated fadeInRight',
+			exit: 'animated fadeOutUp'
+		}			
+	});    	
+	
+}
+
 
 //var x = document.getElementById("demo");
 function getLocation() {
@@ -246,7 +312,7 @@ function getLocation() {
 	    			delay : 3000,
 	    			animate: {
 	    				enter: 'animated fadeInRight',
-	    				exit: 'animated fadeOutRight'
+	    				exit: 'animated fadeOutUp'
 	    			}			
 	    		});        	
         	
@@ -258,7 +324,6 @@ function getLocation() {
 }
 
 function showPosition(position) {
-	console.log( position );
 	initCheck( [position.coords.latitude, position.coords.longitude] );
 }
 

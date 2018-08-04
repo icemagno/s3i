@@ -1,7 +1,9 @@
 var drawSource = null;
-var drawVector = null;
+var drawLayer = null;
 var drawInteraction = null;
 var drawing = false;
+var editing = false;
+var selectArea = null;
 
 function makePattern (color, ptrHDist, ptrVDist, ptrLength, ptrHeight, ptrWidth) {
 	var newColor = 'rgb(' + color[0] + ',' + color[1] + ',' + color[2] + ')';
@@ -65,8 +67,14 @@ function initDraw() {
 		//
 	});		
 
+	drawLayer.set('layerName', 'drawLayer');
 	theMap.addLayer( drawLayer );
 
+}
+
+
+function startDrawing() {
+	
 	drawInteraction = new ol.interaction.Draw({
 		source: drawSource,
 		type: 'Polygon'
@@ -77,33 +85,13 @@ function initDraw() {
 	});
 	
 	drawInteraction.on('drawend', function( evt ){
-	    var drawedFeature =  evt.feature;
-	    
-	    dispose();
-	    
-	    /*
-	    selectUser = new ol.interaction.Select({
-	        condition: ol.events.condition.singleClick,
-	        toggleCondition: ol.events.condition.shiftKeyOnly,    	
-	    	layers: [drawLayer],
-	        // style: overlayStyle
-		});	
-	    theMap.addInteraction( selectUser );
-	    
-	    var modify = new new ol.interaction.Modify({
-	        features: selectUser.getFeatures(),
-	        //style: overlayStyle,
-		});    
-	    theMap.addInteraction(modify);	    
-	    */
-	    
+		//
 	});	
-	
 	theMap.addInteraction( drawInteraction );
-	
 	drawing = true;
-
+	
 }
+
 
 function dispose() {
 	theMap.removeInteraction( drawInteraction );

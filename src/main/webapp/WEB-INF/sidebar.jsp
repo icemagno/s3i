@@ -72,7 +72,7 @@
 			            </span>	 
 					</a>
 				</li>			                       	    
-				<li><a href="#"><i class="fa fa-circle-o text-blue"></i><span> Trânsito</span></a></li>			                       	    
+				<li><a href="javascript:niy();"><i class="fa fa-circle-o text-blue"></i><span> Trânsito</span></a></li>			                       	    
 				<li>
 					<a href="javascript:toggleAeroTraffic();"><i class="fa fa-circle-o text-blue"></i><span> Tráfego Aéreo</span>
 			            <span id="aeroMenuCheck" class="pull-right-container" style="display:none">
@@ -80,7 +80,7 @@
 			            </span>	 
 					</a>
 				</li>			                       	    
-				<li><a href="#"><i class="fa fa-circle-o text-blue"></i><span> Escolas / Estádios</span></a></li>
+				<li><a href="javascript:niy();"><i class="fa fa-circle-o text-blue"></i><span> Escolas / Estádios</span></a></li>
 			</ul>	
         </li>		
 
@@ -91,12 +91,12 @@
             <i class="fa fa-bus"></i><span>Unidades</span>
           </a>
           <ul class="treeview-menu" id="unidade-menu">
-				<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> HazMat</span></a></li>			                       	    
-				<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> Magirus</span></a></li>			                       	    
-				<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> UTI</span></a></li>			                       	    
-				<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> Apoio</span></a></li>			                       	    
-				<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> Drone</span></a></li>			                       	    
-				<li><a href="#"><i class="fa fa-circle-o text-green"></i><span> Pessoal (HelmetCam)</span></a></li>	
+				<li><a href="javascript:niy();"><i class="fa fa-circle-o text-green"></i><span> HazMat</span></a></li>			                       	    
+				<li><a href="javascript:niy();"><i class="fa fa-circle-o text-green"></i><span> Magirus</span></a></li>			                       	    
+				<li><a href="javascript:niy();"><i class="fa fa-circle-o text-green"></i><span> UTI</span></a></li>			                       	    
+				<li><a href="javascript:niy();"><i class="fa fa-circle-o text-green"></i><span> Apoio</span></a></li>			                       	    
+				<li><a href="javascript:niy();"><i class="fa fa-circle-o text-green"></i><span> Drone</span></a></li>			                       	    
+				<li><a href="javascript:niy();"><i class="fa fa-circle-o text-green"></i><span> Pessoal (HelmetCam)</span></a></li>	
 		  </ul>
         </li>
         
@@ -104,17 +104,12 @@
 <security:authorize access="hasRole('ROLE_ADMIN')">
         <li class="header">ADMINISTRAÇÃO</li>
 	        <li>
-	          <a href="#">
+	          <a href="javascript:niy();">
 	            <i class="fa fa-users"></i><span>Usuários</span>
 	          </a>
 	        </li>
 	        <li>
-	          <a href="#">
-	            <i class="fa fa-plug"></i><span>Camadas</span>
-	          </a>
-	        </li>
-	        <li>
-	          <a href="#">
+	          <a href="javascript:niy();">
 	            <i class="fa fa-cogs"></i><span>Configuração</span>
 	          </a>
 	        </li>

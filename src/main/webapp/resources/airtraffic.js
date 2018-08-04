@@ -159,6 +159,7 @@ function initAirTraffic() {
 		source: aircraftSource,
 		style: airCraftStyleFunction
 	});	
+	activeAircraftLayer.set('layerName', 'activeAircraftLayer');
 	theMap.addLayer( activeAircraftLayer );
 	activateAeroTrafficMonitor();
 }

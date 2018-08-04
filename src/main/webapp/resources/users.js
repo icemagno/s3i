@@ -1,6 +1,5 @@
 var usersSource = null;
 var userLayer = null;
-var selectUser = null;
 
 function usersStyleFunction( feature, resolution ) {
 	var props = feature.getProperties();
@@ -45,9 +44,6 @@ function usersStyleFunction( feature, resolution ) {
 }
 
 function addUserToMap( user ) {
-	
-	console.log( user );
-	
 	if( globalUser.name == user.user.name ) {
 		return;
 	}
@@ -82,7 +78,7 @@ function addUserToMap( user ) {
 			delay : 3000,
 			animate: {
 				enter: 'animated fadeInRight',
-				exit: 'animated fadeOutRight'
+				exit: 'animated fadeOutUp'
 			}			
 		});
 	}
@@ -141,6 +137,7 @@ function initUserLayer() {
 		source: usersSource,
 		style: usersStyleFunction
 	});	
+	userLayer.set('layerName', 'userLayer');
 	theMap.addLayer( userLayer );
 	
 }

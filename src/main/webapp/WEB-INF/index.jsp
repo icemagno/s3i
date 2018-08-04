@@ -90,7 +90,7 @@
                   <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 ">
                      <div class="box box-success" id="mapBox">
                         <div class="box-body" >
-                        	<div id="world-map"  style="height: calc(100vh - 195px); width: 100%;" ></div>
+                        	<div id="world-map"  style="height: calc(100vh - 180px); width: 100%;" ></div>
                         </div>
                      </div>
 				  </div>
@@ -98,11 +98,17 @@
 
           </div>
         </section>
-        <!-- /.content -->
       </div>
-      <!-- /.content-wrapper -->
-      <!-- LOAD PAGE FOOTER -->
-      <jsp:include page="footer.jsp" />
+
+	<!-- 
+	 <footer class="main-footer">
+	   <div class="pull-right hidden-xs">
+	     v1.2.234
+	   </div>
+	   <strong>Sistema Phoenix</strong> 
+	 </footer>
+ 	-->
+
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
@@ -122,35 +128,9 @@
           <!-- /.tab-pane -->
           <!-- Settings tab content -->
           <div class="tab-pane" id="control-sidebar-settings-tab">
-            <h3 class="control-sidebar-heading">Importadores Ativos</h3>
-            <ul class="control-sidebar-menu">
-              <li>
-                <a href="javascript:;">
-                  <h4 class="control-sidebar-subheading">
-                    [XYF4A6] - BDGEX 
-                    <span class="pull-right-container">
-                    <span class="label label-danger pull-right">70%</span>
-                    </span>
-                  </h4>
-                  <div class="progress progress-xxs">
-                    <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <h4 class="control-sidebar-subheading">
-                    [UUH34C] - DHN-CARTAS 
-                    <span class="pull-right-container">
-                    <span class="label label-success pull-right">30%</span>
-                    </span>
-                  </h4>
-                  <div class="progress progress-xxs">
-                    <div class="progress-bar progress-bar-success" style="width: 30%"></div>
-                  </div>
-                </a>
-              </li>
-            </ul>
+
+			Reservado
+
           </div>
         </div>
       </aside>
