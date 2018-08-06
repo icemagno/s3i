@@ -26,3 +26,18 @@ function toggleSatelite() {
 	sateliteLayer.setVisible( sateliteVisible );
 	$("#sateliteMenuCheck").toggle();
 }
+
+
+function toggleTransit() {
+	
+	niy();
+	return;
+	
+	transitEnabled = !transitEnabled;
+	if( transitEnabled ) {
+		updateTransit();
+	}
+	$("#transitMenuCheck").toggle();
+	
+}
+

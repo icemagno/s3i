@@ -34,80 +34,72 @@
           </div>
         </nav>
       </header>
-      <!-- Left side column. contains the logo and sidebar -->
+
       <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar" >
-          <!-- SIDEBAR -->
           <jsp:include page="sidebar.jsp" />
         </section>
-        <!-- /.sidebar -->
       </aside>
-      <!-- Content Wrapper. Contains page content -->
       <div id="contentWraper" class="content-wrapper">
       	
         <section  class="content container-fluid">
-          <!-- https://pt.stackoverflow.com/questions/182188/qual-a-diferenc%C3%A7a-entre-col-lg-col-md-e-col-sm-no-bootstrap   -->
-          <div id="theRow" class="row">
+          <div class="row">
 
 <!-- ************************************************************************** -->
-          
-                  <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 "  >
-                  
-                     <div class="box box-danger"  >
-                        <div class="box-body" style="background-color:white">
-						    <div class="mailbox-controls">
-						    	<a href="javascript:drawFireArea();" class="btn btn-default btn-sm ad-click-event">
-									<img src="resources/img/areaav.png" width="15">
-								</a>	
-
-						    	<a href="javascript:editFireArea();" class="btn btn-default btn-sm ad-click-event">
-									<img src="resources/img/pencil.png" width="15">
-								</a>	
-
-						    	<a href="javascript:deleteFireArea();" class="btn btn-default btn-sm ad-click-event">
-									<img src="resources/img/delete.png" width="15">
-								</a>	
-						    </div>	                           
-                        </div>
-                     </div>
-                  
-                     <div class="box box-primary" id="droneCam" style="display:none" >
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 "  >          
+             
+                     <div class="box box-primary"  >
                         <div class="box-header with-border">
-                           <h3 id="droneCamTitle" class="box-title">&nbsp;</h3>
+                           <h3 id="titleKm" class="box-title">KM</h3>
                         </div>
-                        <div class="box-body" style="background-color:white">
-	                        <div  class="embed-responsive embed-responsive-4by3" >
-	                        	<iframe src="https://www.youtube.com/embed/7J02-mB2Qe8?rel=0&mute=1&controls=0&showinfo=0&autoplay=1" frameborder="0" allow="autoplay; encrypted-media"></iframe>
-	                        </div>
+                        <div class="box-body" >
+                        	<img class="img-responsive" id="wKmImage" src="#"></img>
                         </div>
                      </div>
+                     
 
+                     
+				</div>
 <!-- ************************************************************************** -->
 
-                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ">
+                  
+                     <div class="box box-primary"  >
+                        <div class="box-header with-border">
+                           <h3 id="titleVisual" class="box-title">Visual</h3>
+                        </div>
+                        <div class="box-body" >
+                        	<img class="img-responsive" id="wVisImage" src="#"></img>
+                        </div>
+                     </div>                     
+                     
+				  </div>
+                     
+<!-- ************************************************************************** -->
 
-                  <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 ">
+                  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ">
                      <div class="box box-success" id="mapBox">
                         <div class="box-body" >
-                        	<div id="world-map"  style="height: calc(100vh - 180px); width: 100%;" ></div>
+                        	[Sem informação]
                         </div>
                      </div>
 				  </div>
-                     
+
+<!-- ************************************************************************** -->
+
+                  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ">
+                     <div class="box box-success" id="mapBox">
+                        <div class="box-body" >
+                        	[Sem informação]
+                        </div>
+                     </div>
+				  </div>
+
 
           </div>
         </section>
       </div>
 
-	<!-- 
-	 <footer class="main-footer">
-	   <div class="pull-right hidden-xs">
-	     v1.2.234
-	   </div>
-	   <strong>Sistema Phoenix</strong> 
-	 </footer>
- 	-->
 
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark">
@@ -141,18 +133,10 @@
     <!-- LOAD JAVASCRIPT FILES -->
     <jsp:include page="requiredscripts.jsp" />
     
-	  <!-- Trafego Aereo -->
-	  <script type="text/javascript" src="/resources/airtraffic.js"></script>
-
-      <!-- Magno -->
-      <script src="/resources/sockjs.min.js"></script>
-      <script src="/resources/stomp.min.js"></script>
-      <script src="/resources/draw.js"></script>  
-      <script src="/resources/users.js"></script>  
-	  <script src="/resources/transit.js"></script>
-	  <script src="/resources/layers.js"></script>
-	  
-      <script src="/resources/script.js"></script>  
+    
+    
+    <!-- Magno -->
+    <script src="/resources/weather.js"></script>  
     
   </body>
 

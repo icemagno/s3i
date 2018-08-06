@@ -65,6 +65,12 @@ function updateScale() {
 	//
 }
 
+function mapMoveEnd() {
+	
+	//updateTransit();
+	
+}
+
 function startMap() {
 	
 	theView = new ol.View({
@@ -186,6 +192,9 @@ function startMap() {
 	    
 	});	
 	
+	
+	theMap.on('moveend', mapMoveEnd );
+	
 	theMap.on('pointermove', function (evt) {
 		if (evt.dragging) {
 			return;
@@ -253,9 +262,16 @@ function initSystem() {
         	initUserLayer();
         	initDraw();
 
+        	// TESTE
         	setTimeout(function(){
         		fakeDrone(); 
         	}, 10000);        	
+        	// -----------------
+        	
+        	
+        	setInterval(function(){
+        		updateTransit();
+        	}, 5000);
         	
         	
         }
