@@ -23,10 +23,6 @@ function connect() {
     stompClient.debug = null;
 	stompClient.connect({}, function(frame) {
 		
-		stompClient.subscribe('/queue/notify', function(notification) {
-			processData( JSON.parse( notification.body ) );
-		});
-		
 		stompClient.subscribe('/queue/fireman', function(notification) {
 			processFireman( JSON.parse( notification.body ) );
 		});
@@ -43,10 +39,6 @@ function connect() {
 
 function toggleFireToolbar() {
 	$("#fireToolbar").toggle();
-}
-
-function processData( data ) {
-	console.log( data );
 }
 
 function processFireman( data ) {

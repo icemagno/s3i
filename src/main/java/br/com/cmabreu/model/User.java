@@ -68,13 +68,13 @@ public class User implements UserDetails {
 		this.roles = new ArrayList<Role>();
 	}
     
-    @Transient
-    public boolean isAdmin() {
-    	for ( Role roles : getRoles() ) {
-    		if ( roles.getRole().equals( "ROLE_ADMIN" ) ) return true;
-    	}
-    	return false;
-    }
+	@Transient
+	public boolean contains(String roleName ) {
+		for( Role role : getRoles() ) {
+			if ( role.getRole().equals( roleName ) ) return true;
+		}
+		return false;
+	}
     
 	public List<Role> getRoles() {
 		return roles;

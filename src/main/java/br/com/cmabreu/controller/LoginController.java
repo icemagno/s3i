@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import br.com.cmabreu.model.User;
+
 
 
 @Controller
@@ -20,8 +22,17 @@ public class LoginController extends BasicController {
 	@RequestMapping(value = {"/", "/index"}) 
 	public String home( Model model, HttpSession session ) {
 		model.addAttribute( "midasLocation", midasLocation );
-		model.addAttribute( "user", getLoggedUser(session) );
-		return "index";
+		User  user = getLoggedUser( session );
+		model.addAttribute( "user", user );
+		
+		String result = "index";
+		
+		if ( user.contains("ROLE_CITIZEN") ) {
+			result = "citizen";
+		}
+		
+		
+		return result;
 	}
 	
 	@RequestMapping(value ="/loginPage")
