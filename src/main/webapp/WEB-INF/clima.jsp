@@ -28,7 +28,7 @@
                  <a href="/logout"><i class="fa fa-power-off text-red"></i> &nbsp;</a>
               </li>
               <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                <a href="/resources/img/loading-image.gif" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
               </li>
             </ul>
           </div>
@@ -50,10 +50,10 @@
              
                      <div class="box box-primary"  >
                         <div class="box-header with-border">
-                           <h3 id="titleKm" class="box-title">KM</h3>
+                           <h3 id="titleKm" class="box-title">Aguarde...</h3>
                         </div>
                         <div class="box-body" >
-                        	<img class="img-responsive" id="wKmImage" src="#"></img>
+                        	<img class="img-responsive" id="wKmImage" src="/resources/img/loading-image.gif"></img>
                         </div>
                      </div>
                      
@@ -66,33 +66,38 @@
                   
                      <div class="box box-primary"  >
                         <div class="box-header with-border">
-                           <h3 id="titleVisual" class="box-title">Visual</h3>
+                           <h3 id="titleVisual" class="box-title">Aguarde...</h3>
                         </div>
                         <div class="box-body" >
-                        	<img class="img-responsive" id="wVisImage" src="#"></img>
+                        	<img class="img-responsive" id="wVisImage" src="/resources/img/loading-image.gif"></img>
                         </div>
                      </div>                     
-                     
 				  </div>
                      
 <!-- ************************************************************************** -->
 
                   <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ">
-                     <div class="box box-success" id="mapBox">
-                        <div class="box-body" >
-                        	[Sem informação]
+                     <div class="box box-primary"  >
+                        <div class="box-header with-border">
+                           <h3 id="titleSlot01" class="box-title">Vago</h3>
                         </div>
-                     </div>
+                        <div class="box-body" >
+                        	<img class="img-responsive" id="slot01" src="/resources/img/static.gif"></img>
+                        </div>
+                     </div>                     
 				  </div>
 
 <!-- ************************************************************************** -->
 
                   <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ">
-                     <div class="box box-success" id="mapBox">
-                        <div class="box-body" >
-                        	[Sem informação]
+                     <div class="box box-primary"  >
+                        <div class="box-header with-border">
+                           <h3 id="titleSlot02" class="box-title">Vago</h3>
                         </div>
-                     </div>
+                        <div class="box-body" >
+                        	<img class="img-responsive" id="slot02" src="/resources/img/static.gif"></img>
+                        </div>
+                     </div>                     
 				  </div>
 
 

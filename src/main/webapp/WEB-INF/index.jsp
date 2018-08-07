@@ -71,6 +71,17 @@
 						    </div>	                           
                         </div>
                      </div>
+
+                     <div class="box box-danger" id="effisForm" style="display:none" >
+                        <div class="box-header with-border">
+                           <h3 class="box-title">Copernicus EFFIS</h3>
+                        </div>
+                        <div class="box-body" style="background-color:white">
+                        	<img class="img-responsive" src="/resources/img/copernicus.png"></img><br>
+                        	<span style="text-align:center" id="effisDate"></span>
+                        </div>
+                     </div>
+
                   
                      <div class="box box-primary" id="droneCam" style="display:none" >
                         <div class="box-header with-border">
@@ -151,6 +162,7 @@
       <script src="/resources/users.js"></script>  
 	  <script src="/resources/transit.js"></script>
 	  <script src="/resources/layers.js"></script>
+	  <script src="/resources/effis.js"></script>
 	  
       <script src="/resources/script.js"></script>  
     

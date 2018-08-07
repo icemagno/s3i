@@ -12,6 +12,7 @@ var hidranteLayer = null;
 var osmLayer = null;
 var apaLayer = null;
 var sateliteLayer = null;
+var gwisLayer = null;
 /* ------------------------------*/
 
 
@@ -123,6 +124,16 @@ function startMap() {
 	apaLayer.setVisible( false );
 	/* ------------ */
 
+	gwisLayer = new ol.layer.Tile({
+		source: new ol.source.TileWMS({
+			url: 'http://ies-ows.jrc.ec.europa.eu/gwis',
+			params: {'TIME': todayDateSQL(), 'LAYERS': 'ecmwf.fwi', 'TRANSPARENT':true, 'TILED': true, 'FORMAT': 'image/png','tiled': true},
+		}),
+		opacity: 0.5
+	});	
+	gwisLayer.setVisible( false );
+	
+	
 	/*  TESTE   */ 
 	//http://epic-webgis-portugal.isa.ulisboa.pt/wms/epic?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities
 	//https://nowcoast.noaa.gov/arcgis/services/nowcoast/sat_meteo_imagery_time/MapServer/WMSServer
@@ -148,13 +159,16 @@ function startMap() {
 	*/;	
 	/* ------------ */	
 	
+
+	
+	
 	osmLayer.set('layerName', 'osmLayer');
 	sateliteLayer.set('layerName', 'sateliteLayer');
 	apaLayer.set('layerName', 'apaLayer');
 	hidranteLayer.set('layerName', 'hidranteLayer');
 
 	theMap = new ol.Map({
-		layers: [ osmLayer, sateliteLayer, apaLayer, hidranteLayer ],
+		layers: [ osmLayer, sateliteLayer, apaLayer, hidranteLayer, gwisLayer ],
 		target: 'world-map',
 		renderer: 'canvas',
 		controls : [],
@@ -174,6 +188,12 @@ function startMap() {
 	    if (feature) {
 	    	var props = feature.getProperties();
 
+	    	// Um elemento EFFIS?
+	    	if( layerName === 'effisLayer' ) {
+	    		  var win = window.open(props.URL, '_blank');
+	    		  win.focus();	    		
+	    	}
+	    	
 	    	// Uma área de incendio?
 	    	if ( layerName === 'drawLayer' ) {
 	    		//
@@ -360,6 +380,63 @@ $( document ).ready(function() {
 	//$("#contentWraper").append('<div id="world-map" style="position:absolute; top:0px;left:0px;width:100%;height:100%;"></div>');
 	connect();
 });
+
+function todayDate() {
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+
+	if(dd<10) {
+	    dd = '0'+dd
+	} 
+
+	if(mm<10) {
+	    mm = '0'+mm
+	} 
+
+	today = dd + '/' + mm + '/' + yyyy;
+	return today;
+}
+
+function todayDateSQL() {
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+
+	if(dd<10) {
+	    dd = '0'+dd
+	} 
+
+	if(mm<10) {
+	    mm = '0'+mm
+	} 
+
+	today = yyyy + '-' + mm + '-' + dd;
+	return today;
+}
+
+
+function mesPassadoDate() {
+	var today = new Date();
+	today.setMonth(today.getMonth() - 1);
+	
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+
+	if(dd<10) {
+	    dd = '0'+dd
+	} 
+
+	if(mm<10) {
+	    mm = '0'+mm
+	} 
+
+	today = dd + '/' + mm + '/' + yyyy;
+	return today;
+}
 
 // ------------------------ TESTE -------------------------------------------------------------------------
 

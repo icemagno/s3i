@@ -11,14 +11,13 @@ var mes = "08";
 var dia = "06";
 
 function initWeatherVisual() {
-	// 
-	for(x=0; x < 25; x++  ){
+	wVisualImages = []; 
+	for(x=0; x < 25; x++ ){
 		var hora = ("0" + x).slice(-2);
 		var url = "http://meteocentre.com/satellite/europe/europe_vis."+hora+".gif?t=" + Date.now();
 		var dateHuman = dia + "/" + mes + "/" + ano + " " + hora + ":00";
 
 		var obj2 = {};
-		//obj2.url = "https://en.sat24.com/image?type=visual&region=eu&timestamp="+timestampM;
 		obj2.url = url;
 		obj2.dateTime = dateHuman;
 		obj2.ok = false;
@@ -51,25 +50,6 @@ function initWeatherKm() {
 	
 }
 
-function preload( arrayOfImages ) {
-	
-	for( var x = 0; x < arrayOfImages.length; x++ ) {
-		var obj = arrayOfImages[x];
-		
-    	var url = obj.url;
-    	var img = new Image();
-	    img.onload = function() {
-	    	obj.ok = true;
-	    }
-	    img.onerror = function() {
-	    	obj.ok = false;
-	    }
-	    img.src = url;
-	}
-	
-    weatherEnabled = true;
-}
-
 function updateWeatherKm() {
 	if( !weatherEnabled ) return; 
 	
@@ -79,10 +59,18 @@ function updateWeatherKm() {
 	wKmImageIndex++;
 	if( wKmImageIndex == wKmImages.length ) wKmImageIndex = 0;
 	
-	//if( wKmImages[ wKmImageIndex ].ok ) {
-		$( "#wKmImage" ).attr("src", imageKmUrl );
+	
+	var img = new Image();
+    img.onload = function() {
+		$( "#wKmImage" ).attr("src", img.src );
 		$( "#titleKm" ).text( imageKmDate );
-	//}
+    }
+    img.onerror = function() {
+		$( "#wKmImage" ).attr("src", "/resources/img/static.gif" );
+		$( "#titleKm" ).text( "Sem Imagem" );
+    }
+    img.src = imageKmUrl;
+	
 	
 }
 
@@ -96,12 +84,17 @@ function updateWeatherVisual() {
 	wVisualImageIndex++;
 	if( wVisualImageIndex == wVisualImages.length ) wVisualImageIndex = 0;
 	
-	console.log( wVisualImages[ wVisualImageIndex ].ok );
-	
-	//if( wVisualImages[ wVisualImageIndex ].ok ) {
-		$( "#wVisImage" ).attr("src", imageVisUrl );
+
+	var img = new Image();
+    img.onload = function() {
+		$( "#wVisImage" ).attr("src", img.src );
 		$( "#titleVisual" ).text( imageVisDate );
-	//}
+    }
+    img.onerror = function() {
+		$( "#wVisImage" ).attr("src", "/resources/img/static.gif" );
+		$( "#titleVisual" ).text( "Sem Imagem" );
+    }
+    img.src = imageVisUrl;
 	
 }
 
@@ -110,15 +103,14 @@ function updateWeatherVisual() {
 initWeatherKm();
 initWeatherVisual()
 
-preload( wKmImages );
-preload( wVisualImages );
+weatherEnabled = true;
 
 setInterval( function() { 
 	updateWeatherKm();
-}, 1000);	
+}, 300);	
 
 setInterval( function() { 
 	updateWeatherVisual();
-}, 1000);	
+}, 300);	
 
 

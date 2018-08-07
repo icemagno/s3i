@@ -35,11 +35,14 @@
 		                        <img style="width:60px;height:60px" src="/resources/img/logo.png"> Phoenix
 		                     </h1>
 		                     <h4>Sistema de Comando e Controle de Combate à Incêndio</h4>
-		                     <p class="text-justify">
+		                     <p style="border-bottom: 1px dotted #cacaca;padding-bottom:20px" class="text-justify">
 		                        Phoenix é um projeto protótipo para demostração de um sistema de auxílio às
 		                        operações de combate à incêndio. <br><br>
 		                        <b>Entre com usuário 'user01', 'user02' ou 'admin' com a senha 'admin' para entrar.</b>
 		                     </p>
+		                     <!-- 
+		                     <div style="float:left"><img style="width:160px;height:60px" src="resources/img/copernicus.png"></div>
+		                      -->
 		                  </div>
 		                  <div class="col-sm-5">
 		                     <div class="box box-primary">

@@ -8,7 +8,6 @@
       
         <li class="header">MENU PRINCIPAL</li>
 
-		<!-- 
         <li class="treeview">
           <a href="#">
             <i class="fa fa-fire"></i><span>Emergência</span>
@@ -17,11 +16,21 @@
           </a>
           <ul class="treeview-menu" id="emerg-menu">
 	            <li>
-	            	<a href="javascript:toggleFireToolbar();"><i class="fa fa-circle-o text-white"></i><span> Áreas de Incêndio</span></a>
+	            	<a href="javascript:toggleEffis();"><i class="fa fa-circle-o text-red"></i><span> Copernicus EFFIS</span>
+			            <span id="effisMenuCheck" class="pull-right-container" style="display:none">
+			              <small class="label pull-right bg-green"> <i class="fa fa-check-square text-blue"></i> </small>
+			            </span>	 
+	            	</a>
+	            </li>
+	            <li>
+	            	<a href="javascript:toggleGwis();"><i class="fa fa-circle-o text-red"></i><span> Copernicus GWIS</span>
+			            <span id="gwisMenuCheck" class="pull-right-container" style="display:none">
+			              <small class="label pull-right bg-green"> <i class="fa fa-check-square text-blue"></i> </small>
+			            </span>	 
+	            	</a>
 	            </li>
           </ul>
         </li>
- 		-->
         
         <li class="treeview">
           <a href="#">
@@ -29,7 +38,7 @@
             <span id="solucion-count" class="pull-right-container">
             </span>
           </a>
-          <ul class="treeview-menu" id="emerg-menu">
+          <ul class="treeview-menu" id="comp-menu">
 	            <li>
 	            	<a href="javascript:toggleHidrantes();"><i class="fa fa-circle-o text-red"></i><span> Hidrantes</span>
 			            <span id="hidranteMenuCheck" class="pull-right-container" style="display:none">
