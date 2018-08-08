@@ -36,12 +36,28 @@
                   
                      <div class="box box-danger"  >
                         <div class="box-header with-border">
-                           <a href="/camera" class="btn btn-app"><i class="fa fa-fire text-red"></i> Informar</a>
-                        </div>
+                           <a id="takePhotoBtn" class="btn btn-app"><i class="fa fa-camera "></i> Fotografar</a>
+                        </div>                     
                         <div class="box-body" style="background-color:white">
-                        	<div id="world-map" style="height: calc(100vh - 180px); width: 100%;"></div>
+                        	<form>
+                        		<input id="myFileInput" type="file" accept="image/*;capture=camera">
+                        	</form>
+                        	<!-- 	
+                        	<div  class="embed-responsive embed-responsive-4by3" >
+                        		<video id="video" autoplay></video>
+                        	</div>
+                        	-->
                         </div>
                      </div>
+					 <!-- 	
+                     <div class="box box-danger"  >
+                        <div class="box-body" style="background-color:white">
+                        	<div  class="embed-responsive embed-responsive-4by3" >
+                        		<canvas id="photoCanvas" ></canvas>
+                        	</div>
+                        </div>
+                     </div>
+					 -->
 
                   </div>
 
@@ -61,10 +77,8 @@
     </div>
     <!-- LOAD JAVASCRIPT FILES -->
     <jsp:include page="requiredscripts.jsp" />
-    <script src="/resources/sockjs.min.js"></script>
-    <script src="/resources/stomp.min.js"></script>
-    <script src="/resources/effis.js"></script>
-    <script src="/resources/citizen.js"></script>  
+    
+    <script src="/resources/camera.js"></script>  
   </body>
 
 </html>

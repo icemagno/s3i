@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.cmabreu.model.User;
 
-
-
 @Controller
 public class LoginController extends BasicController {
 
