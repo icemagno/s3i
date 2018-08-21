@@ -16,7 +16,7 @@ function effisStyleFunction( feature, resolution ) {
 		image: new ol.style.Icon(({
 			scale : 1,
 			opacity: 1.0,
-			src: '/resources/img/fire.png',
+			src: '/phoenix/resources/img/fire.png',
 		})),
 	      text: new ol.style.Text({
 	          font: '10px Consolas',
@@ -42,7 +42,7 @@ function startEffis( fromDate, toDate ) {
 	if( effisLayer ) removeEffis();
 	
 	effisSource = new ol.source.Vector({
-        url: '/geteffis?fromdate='+fromDate+'&todate='+toDate,
+        url: '/phoenix/geteffis?fromdate='+fromDate+'&todate='+toDate,
         format: new ol.format.KML({
             extractStyles: false
         }),

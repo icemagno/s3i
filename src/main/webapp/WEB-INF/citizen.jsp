@@ -17,7 +17,7 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <li>
-                 <a href="/logout"><i class="fa fa-power-off text-red"></i> &nbsp;</a>
+                 <a href="/phoenix/logout"><i class="fa fa-power-off text-red"></i> &nbsp;</a>
               </li>
             </ul>
           </div>
@@ -36,7 +36,7 @@
                   
                      <div class="box box-danger"  >
                         <div class="box-header with-border">
-                           <a href="/camera" class="btn btn-app"><i class="fa fa-fire text-red"></i> Informar</a>
+                           <a href="/phoenix/camera" class="btn btn-app"><i class="fa fa-fire text-red"></i> Informar</a>
                         </div>
                         <div class="box-body" style="background-color:white">
                         	<div id="world-map" style="height: calc(100vh - 180px); width: 100%;"></div>
@@ -61,10 +61,10 @@
     </div>
     <!-- LOAD JAVASCRIPT FILES -->
     <jsp:include page="requiredscripts.jsp" />
-    <script src="/resources/sockjs.min.js"></script>
-    <script src="/resources/stomp.min.js"></script>
-    <script src="/resources/effis.js"></script>
-    <script src="/resources/citizen.js"></script>  
+    <script src="/phoenix/resources/sockjs.min.js"></script>
+    <script src="/phoenix/resources/stomp.min.js"></script>
+    <script src="/phoenix/resources/effis.js"></script>
+    <script src="/phoenix/resources/citizen.js"></script>  
   </body>
 
 </html>

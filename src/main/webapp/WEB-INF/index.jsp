@@ -25,7 +25,7 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <li>
-                 <a href="/logout"><i class="fa fa-power-off text-red"></i> &nbsp;</a>
+                 <a href="/phoenix/logout"><i class="fa fa-power-off text-red"></i> &nbsp;</a>
               </li>
               <li>
                 <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
@@ -77,7 +77,7 @@
                            <h3 class="box-title">Copernicus EFFIS</h3>
                         </div>
                         <div class="box-body" style="background-color:white">
-                        	<img class="img-responsive" src="/resources/img/copernicus.png"></img><br>
+                        	<img class="img-responsive" src="/phoenix/resources/img/copernicus.png"></img><br>
                         	<span style="text-align:center" id="effisDate"></span>
                         </div>
                      </div>
@@ -153,18 +153,18 @@
     <jsp:include page="requiredscripts.jsp" />
     
 	  <!-- Trafego Aereo -->
-	  <script type="text/javascript" src="/resources/airtraffic.js"></script>
+	  <script type="text/javascript" src="/phoenix/resources/airtraffic.js"></script>
 
       <!-- Magno -->
-      <script src="/resources/sockjs.min.js"></script>
-      <script src="/resources/stomp.min.js"></script>
-      <script src="/resources/draw.js"></script>  
-      <script src="/resources/users.js"></script>  
-	  <script src="/resources/transit.js"></script>
-	  <script src="/resources/layers.js"></script>
-	  <script src="/resources/effis.js"></script>
+      <script src="/phoenix/resources/sockjs.min.js"></script>
+      <script src="/phoenix/resources/stomp.min.js"></script>
+      <script src="/phoenix/resources/draw.js"></script>  
+      <script src="/phoenix/resources/users.js"></script>  
+	  <script src="/phoenix/resources/transit.js"></script>
+	  <script src="/phoenix/resources/layers.js"></script>
+	  <script src="/phoenix/resources/effis.js"></script>
 	  
-      <script src="/resources/script.js"></script>  
+      <script src="/phoenix/resources/script.js"></script>  
     
   </body>
 

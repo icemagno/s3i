@@ -17,7 +17,7 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <li>
-                 <a href="/logout"><i class="fa fa-power-off text-red"></i> &nbsp;</a>
+                 <a href="/phoenix/logout"><i class="fa fa-power-off text-red"></i> &nbsp;</a>
               </li>
             </ul>
           </div>
@@ -78,7 +78,7 @@
     <!-- LOAD JAVASCRIPT FILES -->
     <jsp:include page="requiredscripts.jsp" />
     
-    <script src="/resources/camera.js"></script>  
+    <script src="/phoenix/resources/camera.js"></script>  
   </body>
 
 </html>

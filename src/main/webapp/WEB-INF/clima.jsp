@@ -25,10 +25,10 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <li>
-                 <a href="/logout"><i class="fa fa-power-off text-red"></i> &nbsp;</a>
+                 <a href="/phoenix/logout"><i class="fa fa-power-off text-red"></i> &nbsp;</a>
               </li>
               <li>
-                <a href="/resources/img/loading-image.gif" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                <a href="/phoenix/resources/img/loading-image.gif" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
               </li>
             </ul>
           </div>
@@ -53,7 +53,7 @@
                            <h3 id="titleKm" class="box-title">Aguarde...</h3>
                         </div>
                         <div class="box-body" >
-                        	<img class="img-responsive" id="wKmImage" src="/resources/img/loading-image.gif"></img>
+                        	<img class="img-responsive" id="wKmImage" src="/phoenix/resources/img/loading-image.gif"></img>
                         </div>
                      </div>
                      
@@ -69,7 +69,7 @@
                            <h3 id="titleVisual" class="box-title">Aguarde...</h3>
                         </div>
                         <div class="box-body" >
-                        	<img class="img-responsive" id="wVisImage" src="/resources/img/loading-image.gif"></img>
+                        	<img class="img-responsive" id="wVisImage" src="/phoenix/resources/img/loading-image.gif"></img>
                         </div>
                      </div>                     
 				  </div>
@@ -82,7 +82,7 @@
                            <h3 id="titleSlot01" class="box-title">Vago</h3>
                         </div>
                         <div class="box-body" >
-                        	<img class="img-responsive" id="slot01" src="/resources/img/static.gif"></img>
+                        	<img class="img-responsive" id="slot01" src="/phoenix/resources/img/static.gif"></img>
                         </div>
                      </div>                     
 				  </div>
@@ -95,7 +95,7 @@
                            <h3 id="titleSlot02" class="box-title">Vago</h3>
                         </div>
                         <div class="box-body" >
-                        	<img class="img-responsive" id="slot02" src="/resources/img/static.gif"></img>
+                        	<img class="img-responsive" id="slot02" src="/phoenix/resources/img/static.gif"></img>
                         </div>
                      </div>                     
 				  </div>
@@ -141,7 +141,7 @@
     
     
     <!-- Magno -->
-    <script src="/resources/weather.js"></script>  
+    <script src="/phoenix/resources/weather.js"></script>  
     
   </body>
 

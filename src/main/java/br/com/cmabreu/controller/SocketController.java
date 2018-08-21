@@ -9,21 +9,24 @@ import org.springframework.stereotype.Controller;
 public class SocketController {
 
 
-    @MessageMapping("/notify.fireman")
-    @SendTo("/queue/fireman")
+    @MessageMapping("/phoenix/notify.fireman")
+    @SendTo("/phoenix/queue/fireman")
     public String notifyFireman(@Payload String payload ) {
+    	System.out.println("FIREMAN Online");
         return payload;
     }
     
-    @MessageMapping("/notify.admin")
-    @SendTo("/queue/admin")
+    @MessageMapping("/phoenix/notify.admin")
+    @SendTo("/phoenix/queue/admin")
     public String notifyAdmin(@Payload String payload ) {
+    	System.out.println("ADMIN Online");
         return payload;
     }
 
-    @MessageMapping("/notify.citizen")
-    @SendTo("/queue/citizen")
+    @MessageMapping("/phoenix/notify.citizen")
+    @SendTo("/phoenix/queue/citizen")
     public String notifyCitizen(@Payload String payload ) {
+    	System.out.println("CITIZEN Online");
         return payload;
     }
     

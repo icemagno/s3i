@@ -46,9 +46,9 @@
 			            </span>	            
 	            	</a>
 	            </li>
-	            <li><a href="#"><i class="fa fa-circle-o text-red"></i><span> Quartéis de Bombeiros</span></a></li>
-	            <li><a href="#"><i class="fa fa-circle-o text-red"></i><span> Hospitais</span></a></li>
-	       	    <li><a href="#"><i class="fa fa-circle-o text-red"></i><span> Pontos de Pouso</span></a></li>          
+	            <li><a href="javascript:niy();"><i class="fa fa-circle-o text-red"></i><span> Quartéis de Bombeiros</span></a></li>
+	            <li><a href="javascript:niy();"><i class="fa fa-circle-o text-red"></i><span> Hospitais</span></a></li>
+	       	    <li><a href="javascript:niy();"><i class="fa fa-circle-o text-red"></i><span> Pontos de Pouso</span></a></li>          
           </ul>
         </li>
 
@@ -84,7 +84,7 @@
 				
 				<li>
 					<a href="javascript:toggleTransit();"><i class="fa fa-circle-o text-blue"></i><span> Trânsito</span>
-			            <span id="aeroMenuCheck" class="pull-right-container" style="display:none">
+			            <span id="transitMenuCheck" class="pull-right-container" style="display:none">
 			              <small class="label pull-right bg-green"> &nbsp </small>
 			            </span>	 
 					</a>
@@ -106,7 +106,7 @@
             <i class="fa fa-cloud"></i><span>Auxiliar</span>
           </a>
           <ul class="treeview-menu" >
-				<li><a href="/clima"><i class="fa fa-circle-o"></i><span> Clima</span></a></li>			                       	    
+				<li><a href="/phoenix/clima"><i class="fa fa-circle-o"></i><span> Clima</span></a></li>			                       	    
 		  </ul>
         </li>
 

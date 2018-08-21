@@ -66,7 +66,7 @@ function updateWeatherKm() {
 		$( "#titleKm" ).text( imageKmDate );
     }
     img.onerror = function() {
-		$( "#wKmImage" ).attr("src", "/resources/img/static.gif" );
+		$( "#wKmImage" ).attr("src", "/phoenix/resources/img/static.gif" );
 		$( "#titleKm" ).text( "Sem Imagem" );
     }
     img.src = imageKmUrl;
@@ -91,7 +91,7 @@ function updateWeatherVisual() {
 		$( "#titleVisual" ).text( imageVisDate );
     }
     img.onerror = function() {
-		$( "#wVisImage" ).attr("src", "/resources/img/static.gif" );
+		$( "#wVisImage" ).attr("src", "/phoenix/resources/img/static.gif" );
 		$( "#titleVisual" ).text( "Sem Imagem" );
     }
     img.src = imageVisUrl;

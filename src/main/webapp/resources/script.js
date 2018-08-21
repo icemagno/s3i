@@ -17,18 +17,23 @@ var gwisLayer = null;
 
 
 function connect() {
-    var socket = new SockJS('/ws');
+    var socket = new SockJS('/phoenix/ws');
     stompClient = Stomp.over(socket);
     
     stompClient.debug = null;
 	stompClient.connect({}, function(frame) {
 		
-		stompClient.subscribe('/queue/fireman', function(notification) {
+		stompClient.subscribe('/phoenix/queue/fireman', function(notification) {
 			processFireman( JSON.parse( notification.body ) );
 		});
 		
-		stompClient.subscribe('/queue/admin', function(notification) {
+		stompClient.subscribe('/phoenix/queue/admin', function(notification) {
 			processAdmin( JSON.parse( notification.body ) );
+		});
+		
+
+		stompClient.subscribe('/phoenix/queue/citizen', function(notification) {
+			processCitizen( JSON.parse( notification.body ) );
 		});
 		
 		initSystem();
@@ -49,6 +54,9 @@ function processAdmin( data ) {
 	addUserToMap( data );
 }
 
+function processCitizen( data ) {
+	addUserToMap( data );
+}
 
 function onTextChange() {
 	textChanged = true;
@@ -262,7 +270,7 @@ function editFireArea() {
 function initSystem() {
 	
     $.ajax({
-        url: '/userdetails',
+        url: '/phoenix/userdetails',
         dataType: 'json',
         success: function (user, textstatus) {
         	globalUser = user;
@@ -329,12 +337,14 @@ function getLocation() {
 	
 	
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, 
+        navigator.geolocation.getCurrentPosition( showPosition , 
     		function() {
     	
+        		initCheck( [0, 0] );
+        	
 	    		$.notify({
 	    			title : '',
-	    			message: 'Erro ao descobrir sua localização' 
+	    			message: 'Erro ao descobrir sua localização. Usando Posição de teste.' 
 	    		},{
 	    			type: 'danger',
 	    			delay : 3000,
@@ -347,7 +357,7 @@ function getLocation() {
     		}, options 
         );
     } else {
-        //x.innerHTML = "Geolocation is not supported by this browser.";
+    	//
     }
 }
 
@@ -356,14 +366,33 @@ function showPosition(position) {
 }
 
 function initCheck( position ) {
+	
+	$.notify({
+		title : '',
+		message: 'Enviando sua localização: ' + position 
+	},{
+		type: 'success',
+		delay : 3000,
+		animate: {
+			enter: 'animated fadeInRight',
+			exit: 'animated fadeOutUp'
+		}			
+	});        	
+	
+	
+	
+	
 	var consumer = {};
 	consumer.position = position; 
 	consumer.user = globalUser;
 	if( globalUser.roleName === 'ROLE_ADMIN' ) {
-		stompClient.send( "/notify.admin", {}, JSON.stringify( consumer ) );
+		stompClient.send( "/phoenix/notify.admin", {}, JSON.stringify( consumer ) );
 	}
 	if( globalUser.roleName === 'ROLE_FIREMAN' ) {
-		stompClient.send( "/notify.fireman", {}, JSON.stringify( consumer ) );	
+		stompClient.send( "/phoenix/notify.fireman", {}, JSON.stringify( consumer ) );	
+	}
+	if( globalUser.roleName === 'ROLE_CITIZEN' ) {
+		stompClient.send( "/phoenix/notify.citizen", {}, JSON.stringify( consumer ) );	
 	}
 	
 }

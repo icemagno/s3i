@@ -29,7 +29,7 @@
             <div class="container">
                <div class="mx-auto">
                   <div style="margin:0 auto; width:50px;height:50px">
-                     <!-- <img style="width:40px;height:40px" src="/resources/img/logo.png"> -->
+                     <!-- <img style="width:40px;height:40px" src="/phoenix/resources/img/logo.png"> -->
                   </div>
                </div>
             </div>
@@ -41,7 +41,7 @@
 		         
 		            <section class="content">
 		                     <h1 class="text-red">
-		                        <img style="width:40px;height:40px" src="/resources/img/logo.png"> ${status} | Erro ao processar esta requisição
+		                        <img style="width:40px;height:40px" src="/phoenix/resources/img/logo.png"> ${status} | Erro ao processar esta requisição
 		                     </h1>
 		                     <h3>O sistema encontrou um erro ao processar sua requisição.</h3>
 		                     <p class="text-justify">

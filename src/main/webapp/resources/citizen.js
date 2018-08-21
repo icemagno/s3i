@@ -9,21 +9,21 @@ var osmLayer = null;
 
 
 function connect() {
-    var socket = new SockJS('/ws');
+    var socket = new SockJS('/phoenix/ws');
     stompClient = Stomp.over(socket);
     
     stompClient.debug = null;
 	stompClient.connect({}, function(frame) {
 		
-		stompClient.subscribe('/queue/fireman', function(notification) {
+		stompClient.subscribe('/phoenix/queue/fireman', function(notification) {
 			processFireman( JSON.parse( notification.body ) );
 		});
 		
-		stompClient.subscribe('/queue/admin', function(notification) {
+		stompClient.subscribe('/phoenix/queue/admin', function(notification) {
 			processAdmin( JSON.parse( notification.body ) );
 		});
 
-		stompClient.subscribe('/queue/citizen', function(notification) {
+		stompClient.subscribe('/phoenix/queue/citizen', function(notification) {
 			processCitizen( JSON.parse( notification.body ) );
 		});
 		
@@ -95,7 +95,7 @@ function startMap() {
 function initSystem() {
 	
     $.ajax({
-        url: '/userdetails',
+        url: '/phoenix/userdetails',
         dataType: 'json',
         success: function (user, textstatus) {
         	globalUser = user;
@@ -144,7 +144,7 @@ function initCheck( position ) {
 	var consumer = {};
 	consumer.position = position; 
 	consumer.user = globalUser;
-	stompClient.send( "/notify.citizen", {}, JSON.stringify( consumer ) );	
+	stompClient.send( "/phoenix/notify.citizen", {}, JSON.stringify( consumer ) );	
 }
 
 $( document ).ready(function() {

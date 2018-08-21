@@ -10,7 +10,7 @@
             <div class="container">
                <div class="mx-auto">
                   <div style="margin:0 auto; width:50px;height:50px">
-                     <!-- <img style="width:40px;height:40px" src="/resources/img/logo.png"> -->
+                     <!-- <img style="width:40px;height:40px" src="/phoenix/resources/img/logo.png"> -->
                   </div>
                </div>
             </div>
@@ -32,7 +32,7 @@
 		               <div class="row">
 		                  <div class="col-sm-7 brand-holder">
 		                     <h1>
-		                        <img style="width:60px;height:60px" src="/resources/img/logo.png"> Phoenix
+		                        <img style="width:60px;height:60px" src="/phoenix/resources/img/logo.png"> Phoenix
 		                     </h1>
 		                     <h4>Sistema de Comando e Controle de Combate à Incêndio</h4>
 		                     <p style="border-bottom: 1px dotted #cacaca;padding-bottom:20px" class="text-justify">

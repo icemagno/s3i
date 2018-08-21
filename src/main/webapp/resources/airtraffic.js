@@ -36,7 +36,7 @@ function airCraftStyleFunction( feature, resolution ) {
 			anchorXUnits: 'fraction',
 			anchorYUnits: 'fraction',
 			opacity: 1.0,
-			src: '/resources/img/aero_yellow.png',
+			src: '/phoenix/resources/img/aero_yellow.png',
 			rotateWithView: true,
 		})),
 	      text: new ol.style.Text({
@@ -88,7 +88,7 @@ function getAircraftsBbox() {
 	var minlat = coord[2];
 	var maxlat = coord[0];
 	
-	$.get( '/getairtraffic', {
+	$.get( '/phoenix/getairtraffic', {
             'minlon': minlon,
             'minlat': minlat,
             'maxlon': maxlon,

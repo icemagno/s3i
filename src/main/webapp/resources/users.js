@@ -21,7 +21,7 @@ function usersStyleFunction( feature, resolution ) {
 			anchorXUnits: 'fraction',
 			anchorYUnits: 'fraction',
 			opacity: 1.0,
-			src: '/resources/img/' + image,
+			src: '/phoenix/resources/img/' + image,
 		})),
 	    text: new ol.style.Text({
 			font: '10px Consolas',

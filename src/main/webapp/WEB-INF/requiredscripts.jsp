@@ -30,9 +30,9 @@
 <script src="${midasLocation}/bower_components/select2/dist/js/select2.full.min.js"></script>
 
 <!-- OpenLayers -->
-<script type="text/javascript" src="/resources/ol.js"></script>
+<script type="text/javascript" src="/phoenix/resources/ol.js"></script>
 
 <!-- Notify -->
-<script type="text/javascript" src="/resources/bootstrap-notify.js"></script>
+<script type="text/javascript" src="/phoenix/resources/bootstrap-notify.js"></script>
 	
 	
