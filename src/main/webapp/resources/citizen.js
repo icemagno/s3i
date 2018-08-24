@@ -1,10 +1,18 @@
 var stompClient = null;
+var textChanged = false;
+var myModule = null;
 var theMap = null;
 var theView = null;
 var globalUser = null;
+var selectedFeature = null;
+var modifyInteraction = null;
 
 /* --------  Camadas ----------- */
+var hidranteLayer = null;
 var osmLayer = null;
+var apaLayer = null;
+var sateliteLayer = null;
+var gwisLayer = null;
 /* ------------------------------*/
 
 
@@ -22,11 +30,11 @@ function connect() {
 		stompClient.subscribe('/phoenix/queue/admin', function(notification) {
 			processAdmin( JSON.parse( notification.body ) );
 		});
+		
 
 		stompClient.subscribe('/phoenix/queue/user', function(notification) {
 			processUser( JSON.parse( notification.body ) );
 		});
-		
 		
 		initSystem();
 		
@@ -34,26 +42,34 @@ function connect() {
     
 }
 
-function processUser( data ) {
-	console.log( data );
+function toggleFireToolbar() {
+	$("#fireToolbar").toggle();
 }
 
-
 function processFireman( data ) {
-	//addUserToMap( data );
+	addUserToMap( data );
 }
 
 function processAdmin( data ) {
-	//addUserToMap( data );
+	addUserToMap( data );
 }
 
+function processUser( data ) {
+	addUserToMap( data );
+}
+
+function onTextChange() {
+	textChanged = true;
+}
 
 function updateScale() {
 	//
 }
 
 function mapMoveEnd() {
+	
 	//updateTransit();
+	
 }
 
 function startMap() {
@@ -87,6 +103,73 @@ function startMap() {
 		view: theView
 	});
 	
+	
+	// Responde a um clique no mapa em algum elemento
+	theMap.on('singleclick', function(evt) {
+		var layerName = null;
+		selectedFeature = null;
+		
+	    var feature = theMap.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+	        if( layer )	layerName = layer.get('layerName');
+	        return feature;
+	    });
+	    
+	    if (feature) {
+	    	var props = feature.getProperties();
+
+	    	// Um elemento EFFIS?
+	    	if( layerName === 'effisLayer' ) {
+	    		  var win = window.open(props.URL, '_blank');
+	    		  win.focus();	    		
+	    	}
+	    	
+	    	// Uma área de incendio?
+	    	if ( layerName === 'drawLayer' ) {
+	    		//
+	    	}
+	    	
+	    	if ( layerName === 'userLayer' ) {
+
+	    		// Um drone ?
+		    	if( props.roleName === 'ROLE_DRONE' ) {
+		    		$("#droneCam").show(100);
+		    		$("#droneCamTitle").text( '[Drone] ' + props.fullName );
+		    	}
+		    	
+	    		// Um usuário comum ?
+		    	if( props.roleName === 'ROLE_USER' ) {
+		    		console.log( "Camera no IP " + props.remoteAddress );
+		    	}
+		    	
+		    	
+		    	
+	    	}
+	        
+	    }
+	    
+	});	
+	
+	
+	theMap.on('moveend', mapMoveEnd );
+	
+	theMap.on('pointermove', function (evt) {
+		if (evt.dragging) {
+			return;
+		}
+		var hit = theMap.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
+			
+			return true;
+		});
+		theMap.getTargetElement().style.cursor = hit ? 'pointer' : '';
+	});	
+
+	$( "#sidebarButton" ).click(function() {
+		console.log('xzcxz');
+		setTimeout( function() { 
+			theMap.updateSize();
+		}, 200);
+	});		
+	
 	startEffis( mesPassadoDate(), todayDate() ) 
 	
 }
@@ -99,13 +182,37 @@ function initSystem() {
         dataType: 'json',
         success: function (user, textstatus) {
         	globalUser = user;
+        	
         	getLocation();
+        	
         	startMap();
+        	initUserLayer();
+        	
         }
     });
+	
+    
     
 }
 
+function niy() {
+	
+	$.notify({
+		title : '',
+		message: 'Não Implementado Ainda' 
+	},{
+		type: 'success',
+		delay : 3000,
+		animate: {
+			enter: 'animated fadeInRight',
+			exit: 'animated fadeOutUp'
+		}			
+	});    	
+	
+}
+
+
+//var x = document.getElementById("demo");
 function getLocation() {
 	var options = {
 	  enableHighAccuracy: true,
@@ -113,13 +220,16 @@ function getLocation() {
 	  maximumAge: 0
 	};	
 	
+	
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, 
+        navigator.geolocation.getCurrentPosition( showPosition , 
     		function() {
     	
+        		initCheck( [0, 0] );
+        	
 	    		$.notify({
 	    			title : '',
-	    			message: 'Erro ao descobrir sua localização' 
+	    			message: 'Erro ao descobrir sua localização. Usando Posição de teste.' 
 	    		},{
 	    			type: 'danger',
 	    			delay : 3000,
@@ -132,7 +242,7 @@ function getLocation() {
     		}, options 
         );
     } else {
-        //x.innerHTML = "Geolocation is not supported by this browser.";
+    	//
     }
 }
 
@@ -141,10 +251,28 @@ function showPosition(position) {
 }
 
 function initCheck( position ) {
+	
+	$.notify({
+		title : '',
+		message: 'Avisando sua presença ao sistema.' 
+	},{
+		type: 'success',
+		delay : 3000,
+		animate: {
+			enter: 'animated fadeInRight',
+			exit: 'animated fadeOutUp'
+		}			
+	});        	
+	
+	
+	
+	// Envia sua presença para a rede
 	var consumer = {};
 	consumer.position = position; 
 	consumer.user = globalUser;
+	
 	stompClient.send( "/phoenix/notify.user", {}, JSON.stringify( consumer ) );	
+	
 }
 
 $( document ).ready(function() {
@@ -170,6 +298,25 @@ function todayDate() {
 	return today;
 }
 
+function todayDateSQL() {
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+
+	if(dd<10) {
+	    dd = '0'+dd
+	} 
+
+	if(mm<10) {
+	    mm = '0'+mm
+	} 
+
+	today = yyyy + '-' + mm + '-' + dd;
+	return today;
+}
+
+
 function mesPassadoDate() {
 	var today = new Date();
 	today.setMonth(today.getMonth() - 1);
@@ -189,3 +336,13 @@ function mesPassadoDate() {
 	today = dd + '/' + mm + '/' + yyyy;
 	return today;
 }
+
+
+
+
+
+
+
+
+
+

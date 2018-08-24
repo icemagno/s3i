@@ -22,18 +22,24 @@ public class EffisController {
 	public @ResponseBody String getEffis( @RequestParam(value = "fromdate") String fromDate, 
 			@RequestParam(value = "todate") String toDate ) {
 		
-		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.getMessageConverters().add( 0, new StringHttpMessageConverter(Charset.forName("UTF-8") ) );
-
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept( Arrays.asList( MediaType.APPLICATION_XML ) );
-		headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);		
+		String response = "";
 		
-		String urlEffis = "http://effis.jrc.ec.europa.eu/applications/fire-news/kml/?&amp;q=&amp;from_date="+fromDate+"&amp;to_date="+toDate;
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			restTemplate.getMessageConverters().add( 0, new StringHttpMessageConverter(Charset.forName("UTF-8") ) );
+	
+			HttpHeaders headers = new HttpHeaders();
+			headers.setAccept( Arrays.asList( MediaType.APPLICATION_XML ) );
+			headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+	        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);		
+			
+			String urlEffis = "http://effis.jrc.ec.europa.eu/applications/fire-news/kml/?&amp;q=&amp;from_date="+fromDate+"&amp;to_date="+toDate;
+			
+			response = restTemplate.exchange( urlEffis, HttpMethod.GET,entity, String.class ).getBody();
+		} catch ( Exception e ) {
+			System.out.println("Erro ao receber dados do EFFIS: " + e.getMessage() );
+		}
 		
-		String response = restTemplate.exchange( urlEffis, HttpMethod.GET,entity, String.class ).getBody();
-
 		return response;
 	}
 	

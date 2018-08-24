@@ -200,11 +200,19 @@ function startMap() {
 	    	}
 	    	
 	    	if ( layerName === 'userLayer' ) {
+
 	    		// Um drone ?
 		    	if( props.roleName === 'ROLE_DRONE' ) {
 		    		$("#droneCam").show(100);
 		    		$("#droneCamTitle").text( '[Drone] ' + props.fullName );
 		    	}
+		    	
+	    		// Um usuário comum ?
+		    	if( props.roleName === 'ROLE_USER' ) {
+		    		console.log( "Camera no IP " + props.remoteAddress );
+		    	}
+		    	
+		    	
 		    	
 	    	}
 	        
@@ -369,7 +377,7 @@ function initCheck( position ) {
 	
 	$.notify({
 		title : '',
-		message: 'Enviando sua localização: ' + position 
+		message: 'Avisando sua presença ao sistema.' 
 	},{
 		type: 'success',
 		delay : 3000,
@@ -385,6 +393,7 @@ function initCheck( position ) {
 	var consumer = {};
 	consumer.position = position; 
 	consumer.user = globalUser;
+	
 	if( globalUser.roleName === 'ROLE_ADMIN' ) {
 		stompClient.send( "/phoenix/notify.admin", {}, JSON.stringify( consumer ) );
 	}

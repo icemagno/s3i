@@ -63,7 +63,9 @@
     <jsp:include page="requiredscripts.jsp" />
     <script src="/phoenix/resources/sockjs.min.js"></script>
     <script src="/phoenix/resources/stomp.min.js"></script>
+    <script src="/phoenix/resources/layers.js"></script>
     <script src="/phoenix/resources/effis.js"></script>
+    <script src="/phoenix/resources/users.js"></script>  
     <script src="/phoenix/resources/citizen.js"></script>  
   </body>
 

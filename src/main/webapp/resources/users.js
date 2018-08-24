@@ -47,9 +47,12 @@ function addUserToMap( user ) {
 	
 	console.log( user );
 	
+	// Deixa adicionar eu mesmo...
+	/*
 	if( globalUser.name == user.user.name ) {
 		return;
 	}
+	*/
 	
 	var projection = theView.getProjection();
 	var center = ol.proj.transform( [ user.position[1], user.position[0] ], 'EPSG:4326', projection)
@@ -62,11 +65,13 @@ function addUserToMap( user ) {
 	
 	var roleName = user.user.roleName;
 	var fullName = user.user.fullName;
+	var remoteAddress = user.user.remoteAddress;
 	
 	featurething.set("email", user.user.email );
 	featurething.set("fullName", fullName );
 	featurething.set("name", user.user.name );
 	featurething.set("roleName", roleName );
+	featurething.set("remoteAddress", remoteAddress );
 	usersSource.addFeature( featurething );
 	
 	if( roleName === 'ROLE_ADMIN' ) {
