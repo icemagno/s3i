@@ -23,10 +23,13 @@ public class SocketController {
         return payload;
     }
 
-    @MessageMapping("/phoenix/notify.citizen")
-    @SendTo("/phoenix/queue/citizen")
+    @MessageMapping("/phoenix/notify.user")
+    @SendTo("/phoenix/queue/user")
     public String notifyCitizen(@Payload String payload ) {
-    	System.out.println("CITIZEN Online");
+    	//System.out.println("USER Online on " + request.getRemoteAddr() );
+    	System.out.println( payload );
+    	
+    	
         return payload;
     }
     

@@ -7,12 +7,21 @@ public class UserDTO {
 	private String email;
 	private String fullName;
 	private String roleName;
+	private String remoteAddress;
 
 	public UserDTO( User user ) {
 		this.name = user.getName();
 		this.email = user.getEmail();
 		this.fullName = user.getFullName();
 		this.roleName = user.getRoles().get(0).getRole();
+	}
+
+	public String getRemoteAddress() {
+		return remoteAddress;
+	}
+
+	public void setRemoteAddress(String remoteAddress) {
+		this.remoteAddress = remoteAddress;
 	}
 
 	public String getName() {

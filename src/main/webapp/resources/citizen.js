@@ -23,8 +23,8 @@ function connect() {
 			processAdmin( JSON.parse( notification.body ) );
 		});
 
-		stompClient.subscribe('/phoenix/queue/citizen', function(notification) {
-			processCitizen( JSON.parse( notification.body ) );
+		stompClient.subscribe('/phoenix/queue/user', function(notification) {
+			processUser( JSON.parse( notification.body ) );
 		});
 		
 		
@@ -34,7 +34,7 @@ function connect() {
     
 }
 
-function processCitizen( data ) {
+function processUser( data ) {
 	console.log( data );
 }
 
@@ -144,7 +144,7 @@ function initCheck( position ) {
 	var consumer = {};
 	consumer.position = position; 
 	consumer.user = globalUser;
-	stompClient.send( "/phoenix/notify.citizen", {}, JSON.stringify( consumer ) );	
+	stompClient.send( "/phoenix/notify.user", {}, JSON.stringify( consumer ) );	
 }
 
 $( document ).ready(function() {

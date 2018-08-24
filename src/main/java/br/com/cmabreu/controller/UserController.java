@@ -1,5 +1,6 @@
 package br.com.cmabreu.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -13,8 +14,11 @@ import br.com.cmabreu.misc.UserDTO;
 public class UserController extends BasicController {
 
 	@RequestMapping(value = "/userdetails", method = RequestMethod.GET, produces = "application/json") 
-	public @ResponseBody UserDTO userDetails( HttpSession session ) {
+	public @ResponseBody UserDTO userDetails( HttpSession session, HttpServletRequest request ) {
+		
 		UserDTO user = new UserDTO( getLoggedUser(session) );
+		user.setRemoteAddress( request.getRemoteAddr() );
+		
 		return user;
 	}	
 	

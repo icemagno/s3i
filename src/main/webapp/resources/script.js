@@ -32,8 +32,8 @@ function connect() {
 		});
 		
 
-		stompClient.subscribe('/phoenix/queue/citizen', function(notification) {
-			processCitizen( JSON.parse( notification.body ) );
+		stompClient.subscribe('/phoenix/queue/user', function(notification) {
+			processUser( JSON.parse( notification.body ) );
 		});
 		
 		initSystem();
@@ -54,7 +54,7 @@ function processAdmin( data ) {
 	addUserToMap( data );
 }
 
-function processCitizen( data ) {
+function processUser( data ) {
 	addUserToMap( data );
 }
 
@@ -381,7 +381,7 @@ function initCheck( position ) {
 	
 	
 	
-	
+	// Envia sua presença para a rede
 	var consumer = {};
 	consumer.position = position; 
 	consumer.user = globalUser;
@@ -391,8 +391,8 @@ function initCheck( position ) {
 	if( globalUser.roleName === 'ROLE_FIREMAN' ) {
 		stompClient.send( "/phoenix/notify.fireman", {}, JSON.stringify( consumer ) );	
 	}
-	if( globalUser.roleName === 'ROLE_CITIZEN' ) {
-		stompClient.send( "/phoenix/notify.citizen", {}, JSON.stringify( consumer ) );	
+	if( globalUser.roleName === 'ROLE_USER' ) {
+		stompClient.send( "/phoenix/notify.user", {}, JSON.stringify( consumer ) );	
 	}
 	
 }

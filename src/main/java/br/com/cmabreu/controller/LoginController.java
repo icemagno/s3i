@@ -25,7 +25,7 @@ public class LoginController extends BasicController {
 		
 		String result = "index";
 		
-		if ( user.contains("ROLE_CITIZEN") ) {
+		if ( user.contains("ROLE_USER") ) {
 			result = "citizen";
 		}
 		

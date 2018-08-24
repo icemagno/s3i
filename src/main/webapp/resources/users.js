@@ -44,6 +44,9 @@ function usersStyleFunction( feature, resolution ) {
 }
 
 function addUserToMap( user ) {
+	
+	console.log( user );
+	
 	if( globalUser.name == user.user.name ) {
 		return;
 	}
@@ -100,6 +103,22 @@ function addUserToMap( user ) {
 		});
 	}
 
+	if( roleName === 'ROLE_USER' ) {
+		$.notify({
+			title : '',
+			message: 'Usuário ' + fullName + ' está online.' 
+		},{
+			// settings
+			type: 'success',
+			delay : 3000,
+			animate: {
+				enter: 'animated fadeInRight',
+				exit: 'animated fadeOutRight'
+			}			
+		});
+	}
+	
+	
 	if( roleName === 'ROLE_DRONE' ) {
 		// http://bootstrap-growl.remabledesigns.com
 		$.notify({
