@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.com.cmabreu</groupId>
-	<artifactId>sc3i</artifactId>
+	<artifactId>phoenix</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
 
-	<name>sc3i</name>
-	<description>SCCCI</description>
+	<name>phoenix</name>
+	<description>Phoenix</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -62,14 +62,24 @@
 		    <artifactId>spring-security-taglibs</artifactId>
 		</dependency>	
 
+<!-- 
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>	
+ -->
+		
+		<dependency>
+		   <groupId>org.springframework.boot</groupId>
+		   <artifactId>spring-boot-starter-tomcat</artifactId>
+		   <scope>provided</scope>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
