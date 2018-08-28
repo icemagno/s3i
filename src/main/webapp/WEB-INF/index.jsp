@@ -94,6 +94,24 @@
                         </div>
                      </div>
 
+
+                     <div class="box box-primary" id="userCam" style="display:none" >
+                        <div class="box-header with-border">
+                           <h3 id="userCamTitle" class="box-title">&nbsp;</h3>
+			               <div class="box-tools pull-right">
+				               <button type="button" class="btn btn-box-tool" onclick="closeUserCam();"><i class="fa fa-trash"></i>
+				               </button>
+			               </div>                           
+                           
+                        </div>
+                        <div class="box-body" style="background-color:white">
+	                        <div  class="embed-responsive embed-responsive-4by3" >
+	                        	<img class="img-responsive" id="userCamImage" src="/phoenix/resources/img/static.gif"></img>
+	                        </div>
+                        </div>
+                     </div>
+
+
 <!-- ************************************************************************** -->
 
                   </div>

@@ -51,15 +51,13 @@ function toggleSatelite() {
 
 
 function toggleTransit() {
-	
 	niy();
-	return;
-	
+	/*
 	transitEnabled = !transitEnabled;
 	if( transitEnabled ) {
 		updateTransit();
 	}
 	$("#transitMenuCheck").toggle();
-	
+	*/
 }
 

@@ -56,7 +56,7 @@ function addUserToMap( user ) {
 	
 	var projection = theView.getProjection();
 	var center = ol.proj.transform( [ user.position[1], user.position[0] ], 'EPSG:4326', projection)
-	
+
 	var thing = new ol.geom.Point( center );
 	var featurething = new ol.Feature({
 	    name: user.name,
@@ -73,6 +73,9 @@ function addUserToMap( user ) {
 	featurething.set("roleName", roleName );
 	featurething.set("remoteAddress", remoteAddress );
 	usersSource.addFeature( featurething );
+	
+	// Zoom para o novo usuario online
+	theMap.getView().animate({center: center, zoom: 10, duration : 2000});
 	
 	if( roleName === 'ROLE_ADMIN' ) {
 		// http://bootstrap-growl.remabledesigns.com

@@ -15,10 +15,14 @@ var sateliteLayer = null;
 var gwisLayer = null;
 /* ------------------------------*/
 
+var userCamTimer = 0;
+var userCamIpSource = "";
 
 function connect() {
     var socket = new SockJS('/phoenix/ws');
     stompClient = Stomp.over(socket);
+    stompClient.heartbeat.outgoing = 2000;
+    stompClient.heartbeat.incoming = 2000;
     
     stompClient.debug = null;
 	stompClient.connect({}, function(frame) {
@@ -37,6 +41,21 @@ function connect() {
 		});
 		
 		initSystem();
+		
+	}, function( theMessage ) {
+	    
+		$.notify({
+			title : '',
+			message: theMessage 
+		},{
+			type: 'danger',
+			delay : 3000,
+			animate: {
+				enter: 'animated fadeInRight',
+				exit: 'animated fadeOutUp'
+			}			
+		});   		
+		
 		
 	});    
     
@@ -203,13 +222,21 @@ function startMap() {
 
 	    		// Um drone ?
 		    	if( props.roleName === 'ROLE_DRONE' ) {
-		    		$("#droneCam").show(100);
+		    		$("#droneCam").show(1000);
 		    		$("#droneCamTitle").text( '[Drone] ' + props.fullName );
 		    	}
 		    	
 	    		// Um usuário comum ?
 		    	if( props.roleName === 'ROLE_USER' ) {
-		    		console.log( "Camera no IP " + props.remoteAddress );
+		    		$("#userCam").show(1000);
+		    		$("#userCamTitle").text( '[Usuário] ' + props.remoteAddress );	
+		    		
+		    		userCamIpSource = props.remoteAddress;
+		    		
+		    		userCamTimer = setInterval(function(){
+		    			updateUserCam( );
+		        	}, 500);		    		
+		    		
 		    	}
 		    	
 		    	
@@ -243,6 +270,31 @@ function startMap() {
 	
 }
 
+function updateUserCam( ) {
+	// http://191.25.68.237:8080/shot.jpg?rnd=259399
+	// http://191.25.68.237:8080/gps.json
+	// http://191.25.68.237:8080/status.json
+	// http://191.25.68.237:8080/sensors.json
+	
+	// {"gps":{},"network":{"latitude":-22.8972118,"longitude":-43.1740812,"accuracy":34.4}}
+	
+	var rand = Math.floor(Math.random() * 400000) + 100000 ;
+	
+	var url = "http://191.25.68.237:8080/shot.jpg?rnd=" + rand;
+	$("#userCamImage").attr('src', url );
+	
+	console.log( userCamIpSource );
+	
+}
+
+function closeDroneCam() {
+	$("#droneCam").hide(1000);
+}
+
+function closeUserCam() {
+	$("#userCam").hide(1000);
+	userCamVideoEnabled = false;
+}
 
 function editFireArea() {
 	var features = drawSource.getFeatures();

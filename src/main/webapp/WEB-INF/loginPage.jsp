@@ -38,7 +38,7 @@
 		                     <p style="border-bottom: 1px dotted #cacaca;padding-bottom:20px" class="text-justify">
 		                        Phoenix é um projeto protótipo para demostração de um sistema de auxílio às
 		                        operações de combate à incêndio. <br><br>
-		                        <b>Entre com usuário 'user01', 'user02' ou 'admin' com a senha 'admin' para entrar.</b>
+		                        <b>Entre com usuário 'admin', 'drone', 'user01', 'user02' ou 'fireman01' com a senha 'admin' para entrar.</b>
 		                     </p>
 		                     <!-- 
 		                     <div style="float:left"><img style="width:160px;height:60px" src="resources/img/copernicus.png"></div>
