@@ -301,11 +301,62 @@ function editFireArea() {
 function initSystem() {
 	console.log("initSystem");
 	
+	/*
+	$.getJSON('https://ipapi.co/json/', function(data) {
+		  console.log(JSON.stringify(data, null, 2));
+	});
+	
+	{
+	  "ip": "116.12.250.1",
+	  "city": "Singapore",
+	  "region": "Central Singapore Community Development Council",
+	  "country": "SG",
+	  "country_name": "Singapore",
+	  "postal": null,
+	  "latitude": 1.2855,
+	  "longitude": 103.8565,
+	  "timezone": "Asia/Singapore"
+	}		
+		
+	*/
+	
+	
+	
+	/*
+	 
 	$.getJSON('http://ipinfo.io', function(data){
+	
+	}  
+	  
+	{
+	  "ip": "116.12.250.1",
+	  "hostname": "No Hostname",
+	  "city": "Singapore",
+	  "region": "Central Singapore Community Development Council",
+	  "country": "SG",
+	  "loc": "1.2931,103.8558",
+	  "org": "AS3758 SingNet"
+	}	
+	
+	*/
+	
+	
+	
+	$.getJSON('https://ipapi.co/json/', function(data){
 		
 			if( data ) {
 		
-				console.log(" > IP : " + data.ip );
+				// Modo http://ipinfo.io  ---------------------
+        		var location = data.loc.split(",");
+        		var latitude = parseFloat( location[0] );
+        		var longitude = parseFloat( location[1] )
+				data.latitude = latitude;
+        		data.longitude = longitude;
+        		// --------------------------------------------
+				
+				console.log(" > Dados recebidos : " );
+				console.log( data );
+				console.log(" > --------------------------- " );
 			
 			    $.ajax({
 			        url: '/phoenix/userdetails?ip=' + data.ip,
@@ -395,9 +446,8 @@ function getLocation( theData ) {
         navigator.geolocation.getCurrentPosition( showPosition , 
     		function() {
         		
-        		var location = theData.loc.split(",");
-        	
-        		initCheck( [parseFloat( location[0] ), parseFloat( location[1] )] );
+        		
+        		initCheck( [theData.latitude, theData.longitude] );
         	
 	    		$.notify({
 	    			title : '',
