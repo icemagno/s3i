@@ -5,15 +5,15 @@ function usersStyleFunction( feature, resolution ) {
 	var props = feature.getProperties();
 	var resultStyles = [];
 	var image = 'admin.png';
-	
+
 	if ( props.roleName === 'ROLE_FIREMAN') {
 		image = 'fireman.png';
 	}
-	
+
 	if ( props.roleName === 'ROLE_DRONE') {
 		image = 'drone.png';
 	}
-	
+
 	var adminStyle = new ol.style.Style({
 		image: new ol.style.Icon(({
 			scale : 1,
@@ -23,7 +23,7 @@ function usersStyleFunction( feature, resolution ) {
 			opacity: 1.0,
 			src: '/phoenix/resources/img/' + image,
 		})),
-	    text: new ol.style.Text({
+		text: new ol.style.Text({
 			font: '10px Consolas',
 			textAlign: 'center',
 			offsetX: 0,
@@ -35,48 +35,78 @@ function usersStyleFunction( feature, resolution ) {
 				color: '#FFFFFF', width: 1
 			}),
 			text: props.fullName,
-	    })    			
+		})    			
 	});
 
 	resultStyles.push( adminStyle );
 	return resultStyles;	
-	
+
+}
+
+function flyTo(location, done) {
+	var view = theMap.getView();
+	var duration = 4000;
+	var zoom = view.getZoom();
+	var parts = 2;
+	var called = false;
+	function callback(complete) {
+		--parts;
+		if (called) {
+			return;
+		}
+		if (parts === 0 || !complete) {
+			called = true;
+			done(complete);
+		}
+	}
+	view.animate({
+		center: location,
+		duration: duration
+	}, callback);
+	view.animate({
+		zoom: zoom - 1,
+		duration: duration / 2
+	}, {
+		zoom: zoom,
+		duration: duration / 2
+	}, callback);
 }
 
 function addUserToMap( user ) {
-	
-	console.log( user );
-	
+
 	// Deixa adicionar eu mesmo...
 	/*
 	if( globalUser.name == user.user.name ) {
 		return;
 	}
-	*/
+	 */
+	console.log("Add User to Map");
+	console.log( user );
 	
 	var projection = theView.getProjection();
 	var center = ol.proj.transform( [ user.position[1], user.position[0] ], 'EPSG:4326', projection)
 
 	var thing = new ol.geom.Point( center );
 	var featurething = new ol.Feature({
-	    name: user.name,
-	    geometry: thing,
+		name: user.name,
+		geometry: thing,
 	});
-	
+
 	var roleName = user.user.roleName;
 	var fullName = user.user.fullName;
 	var remoteAddress = user.user.remoteAddress;
-	
+
 	featurething.set("email", user.user.email );
 	featurething.set("fullName", fullName );
 	featurething.set("name", user.user.name );
 	featurething.set("roleName", roleName );
 	featurething.set("remoteAddress", remoteAddress );
 	usersSource.addFeature( featurething );
-	
+
 	// Zoom para o novo usuario online
-	theMap.getView().animate({center: center, zoom: 10, duration : 2000});
-	
+	//theMap.getView().animate({center: center, zoom: 10, duration : 2000});
+	flyTo(center, function() {});
+
 	if( roleName === 'ROLE_ADMIN' ) {
 		// http://bootstrap-growl.remabledesigns.com
 		$.notify({
@@ -93,7 +123,7 @@ function addUserToMap( user ) {
 			}			
 		});
 	}
-	
+
 	if( roleName === 'ROLE_FIREMAN' ) {
 		// http://bootstrap-growl.remabledesigns.com
 		$.notify({
@@ -125,8 +155,8 @@ function addUserToMap( user ) {
 			}			
 		});
 	}
-	
-	
+
+
 	if( roleName === 'ROLE_DRONE' ) {
 		// http://bootstrap-growl.remabledesigns.com
 		$.notify({
@@ -143,7 +173,7 @@ function addUserToMap( user ) {
 			}			
 		});
 	}
-	
+
 	return featurething;
 }
 
@@ -159,13 +189,13 @@ function initUserLayer() {
 	usersSource = new ol.source.Vector({
 		projection: theView.getProjection(),
 	});
-	
+
 	userLayer = new ol.layer.Vector({
 		source: usersSource,
 		style: usersStyleFunction
 	});	
 	userLayer.set('layerName', 'userLayer');
 	theMap.addLayer( userLayer );
-	
+
 }
 

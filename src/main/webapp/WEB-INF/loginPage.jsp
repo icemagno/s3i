@@ -40,9 +40,15 @@
 		                        operações de combate à incêndio. <br><br>
 		                        <b>Entre com usuário 'admin', 'drone', 'user01', 'user02' ou 'fireman01' com a senha 'admin' para entrar.</b>
 		                     </p>
-		                     <!-- 
-		                     <div style="float:left"><img style="width:160px;height:60px" src="resources/img/copernicus.png"></div>
-		                      -->
+		                      
+		                     <div style="margin:0 auto">
+		                     	 <p>Baixe em seu tablet ou celular o APP para servir imagens da câmera ao sistema.</p>
+			                     <a target="__BLANK" href="https://play.google.com/store/apps/details?id=com.pas.webcam&hl=pt_BR">
+			                     	<img style="width:160px;height:60px" src="resources/img/badge.png">
+			                     </a>
+		                     </div>
+		                     	
+		                     
 		                  </div>
 		                  <div class="col-sm-5">
 		                     <div class="box box-primary">

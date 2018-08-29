@@ -176,23 +176,54 @@ function startMap() {
 
 
 function initSystem() {
+	console.log("initSystem");
 	
-    $.ajax({
-        url: '/phoenix/userdetails',
-        dataType: 'json',
-        success: function (user, textstatus) {
-        	globalUser = user;
-        	
-        	getLocation();
-        	
-        	startMap();
-        	initUserLayer();
-        	
-        }
-    });
+	$.getJSON('http://ipinfo.io', function(data){
+		
+			if( data ) {
+		
+				console.log(" > IP : " + data.ip );
+			
+			    $.ajax({
+			        url: '/phoenix/userdetails?ip=' + data.ip,
+			        dataType: 'json',
+			        success: function (user, textstatus) {
+			        	globalUser = user;
+			        	globalUser.data = data;
+			        	
+			        	getLocation( data );
+			        	
+			        	startMap();
+			        	//initAirTraffic();
+			        	initUserLayer();
+			        	//initDraw();
+		
+			        	/*
+			        	setInterval(function(){
+			        		updateTransit();
+			        	}, 5000);
+			        	*/
+			        	
+			        }
+			    });
+		
+			} else {
+				
+				$.notify({
+					title : '',
+					message: 'Algo deu errado ao determinar seu IP.' 
+				},{
+					type: 'danger',
+					delay : 3000,
+					animate: {
+						enter: 'animated fadeInRight',
+						exit: 'animated fadeOutUp'
+					}			
+				});  				
+				
+			}		
+	});
 	
-    
-    
 }
 
 function niy() {
@@ -213,7 +244,8 @@ function niy() {
 
 
 //var x = document.getElementById("demo");
-function getLocation() {
+function getLocation( theData ) {
+	
 	var options = {
 	  enableHighAccuracy: true,
 	  timeout: 5000,
@@ -224,8 +256,10 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition( showPosition , 
     		function() {
-    	
-        		initCheck( [0, 0] );
+        		
+        		var location = theData.loc.split(",");
+        	
+        		initCheck( [parseFloat( location[0] ), parseFloat( location[1] )] );
         	
 	    		$.notify({
 	    			title : '',

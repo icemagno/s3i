@@ -107,7 +107,8 @@ function startMap() {
 	
 	/*  OpenStreetMap   */
 	osmLayer = new ol.layer.Tile({
-		source: new ol.source.OSM()
+		source: new ol.source.OSM(),
+		preload: 5,
 	});
 	osmLayer.setVisible( true );
 	/* ------------ */
@@ -151,34 +152,6 @@ function startMap() {
 		opacity: 0.5
 	});	
 	gwisLayer.setVisible( false );
-	
-	
-	/*  TESTE   */ 
-	//http://epic-webgis-portugal.isa.ulisboa.pt/wms/epic?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities
-	//https://nowcoast.noaa.gov/arcgis/services/nowcoast/sat_meteo_imagery_time/MapServer/WMSServer
-	/*
-	epic = new ol.layer.Tile({
-		source: new ol.source.TileWMS({
-			url: 'https://nowcoast.noaa.gov/arcgis/services/nowcoast/sat_meteo_imagery_time/MapServer/WmsServer',
-			params: {'LAYERS': '1', 'TILED': true, 'FORMAT': 'image/png8','tiled': true,},
-		})
-	});	
-	epic.setVisible( true );
-	*/
-	/* ------------ */	
-	
-	/* MapServer */
-	// https://nowcoast.noaa.gov/arcgis/services/nowcoast/sat_meteo_imagery_time/MapServer/
-	/*
-	var mapserver = new ol.layer.Tile({
-		source: new ol.source.XYZ({
-			url: 'https://nowcoast.noaa.gov/arcgis/rest/services/nowcoast/sat_meteo_imagery_time/MapServer/tile/{z}/{y}/{x}'
-		})
-	})
-	*/;	
-	/* ------------ */	
-	
-
 	
 	
 	osmLayer.set('layerName', 'osmLayer');
@@ -238,15 +211,10 @@ function startMap() {
 		        	}, 500);		    		
 		    		
 		    	}
-		    	
-		    	
-		    	
 	    	}
-	        
 	    }
 	    
 	});	
-	
 	
 	theMap.on('moveend', mapMoveEnd );
 	
@@ -275,16 +243,20 @@ function updateUserCam( ) {
 	// http://191.25.68.237:8080/gps.json
 	// http://191.25.68.237:8080/status.json
 	// http://191.25.68.237:8080/sensors.json
-	
 	// {"gps":{},"network":{"latitude":-22.8972118,"longitude":-43.1740812,"accuracy":34.4}}
 	
 	var rand = Math.floor(Math.random() * 400000) + 100000 ;
+	var url = "http://"+userCamIpSource+":8080/shot.jpg?rnd=" + rand;
 	
-	var url = "http://191.25.68.237:8080/shot.jpg?rnd=" + rand;
-	$("#userCamImage").attr('src', url );
 	
-	console.log( userCamIpSource );
-	
+	var img = new Image();
+    img.onload = function() {
+    	$("#userCamImage").attr('src', url );
+    }
+    img.onerror = function() {
+		$( "#userCamImage" ).attr("src", "/phoenix/resources/img/static.gif" );
+    }
+    img.src = url;	
 }
 
 function closeDroneCam() {
@@ -293,7 +265,6 @@ function closeDroneCam() {
 
 function closeUserCam() {
 	$("#userCam").hide(1000);
-	userCamVideoEnabled = false;
 }
 
 function editFireArea() {
@@ -328,37 +299,60 @@ function editFireArea() {
 
 
 function initSystem() {
+	console.log("initSystem");
 	
-    $.ajax({
-        url: '/phoenix/userdetails',
-        dataType: 'json',
-        success: function (user, textstatus) {
-        	globalUser = user;
-        	
-        	getLocation();
-        	
-        	startMap();
-        	initAirTraffic();
-        	initUserLayer();
-        	initDraw();
-
-        	// TESTE
-        	setTimeout(function(){
-        		fakeDrone(); 
-        	}, 10000);        	
-        	// -----------------
-        	
-        	
-        	setInterval(function(){
-        		updateTransit();
-        	}, 5000);
-        	
-        	
-        }
-    });
+	$.getJSON('http://ipinfo.io', function(data){
+		
+			if( data ) {
+		
+				console.log(" > IP : " + data.ip );
+			
+			    $.ajax({
+			        url: '/phoenix/userdetails?ip=' + data.ip,
+			        dataType: 'json',
+			        success: function (user, textstatus) {
+			        	globalUser = user;
+			        	globalUser.data = data;
+			        	
+			        	getLocation( data );
+			        	
+			        	startMap();
+			        	initAirTraffic();
+			        	initUserLayer();
+			        	initDraw();
+		
+			        	// TESTE
+			        	setTimeout(function(){
+			        		fakeDrone(); 
+			        	}, 10000);        	
+			        	// -----------------
+			        	
+			        	/*
+			        	setInterval(function(){
+			        		updateTransit();
+			        	}, 5000);
+			        	*/
+			        	
+			        }
+			    });
+		
+			} else {
+				
+				$.notify({
+					title : '',
+					message: 'Algo deu errado ao determinar seu IP.' 
+				},{
+					type: 'danger',
+					delay : 3000,
+					animate: {
+						enter: 'animated fadeInRight',
+						exit: 'animated fadeOutUp'
+					}			
+				});  				
+				
+			}		
+	});
 	
-    
-    
 }
 
 function drawFireArea() {
@@ -388,7 +382,8 @@ function niy() {
 
 
 //var x = document.getElementById("demo");
-function getLocation() {
+function getLocation( theData ) {
+	
 	var options = {
 	  enableHighAccuracy: true,
 	  timeout: 5000,
@@ -399,8 +394,10 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition( showPosition , 
     		function() {
-    	
-        		initCheck( [0, 0] );
+        		
+        		var location = theData.loc.split(",");
+        	
+        		initCheck( [parseFloat( location[0] ), parseFloat( location[1] )] );
         	
 	    		$.notify({
 	    			title : '',

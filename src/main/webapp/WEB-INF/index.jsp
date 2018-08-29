@@ -86,10 +86,15 @@
                      <div class="box box-primary" id="droneCam" style="display:none" >
                         <div class="box-header with-border">
                            <h3 id="droneCamTitle" class="box-title">&nbsp;</h3>
+			               <div class="box-tools pull-right">
+				               <button type="button" class="btn btn-box-tool" onclick="closeDroneCam();"><i class="fa fa-trash"></i></button>
+			               </div>                           
                         </div>
                         <div class="box-body" style="background-color:white">
 	                        <div  class="embed-responsive embed-responsive-4by3" >
+<!-- 	                        
 	                        	<iframe src="https://www.youtube.com/embed/7J02-mB2Qe8?rel=0&mute=1&controls=0&showinfo=0&autoplay=1" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+ -->
 	                        </div>
                         </div>
                      </div>
@@ -99,14 +104,12 @@
                         <div class="box-header with-border">
                            <h3 id="userCamTitle" class="box-title">&nbsp;</h3>
 			               <div class="box-tools pull-right">
-				               <button type="button" class="btn btn-box-tool" onclick="closeUserCam();"><i class="fa fa-trash"></i>
-				               </button>
+				               <button type="button" class="btn btn-box-tool" onclick="closeUserCam();"><i class="fa fa-trash"></i></button>
 			               </div>                           
-                           
                         </div>
                         <div class="box-body" style="background-color:white">
 	                        <div  class="embed-responsive embed-responsive-4by3" >
-	                        	<img class="img-responsive" id="userCamImage" src="/phoenix/resources/img/static.gif"></img>
+	                        	<img style="width:100%" class="img-responsive" id="userCamImage" src="/phoenix/resources/img/static.gif"></img>
 	                        </div>
                         </div>
                      </div>
