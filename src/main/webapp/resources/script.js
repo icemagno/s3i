@@ -15,7 +15,7 @@ var sateliteLayer = null;
 var gwisLayer = null;
 /* ------------------------------*/
 
-var userCamTimer = 0;
+var userCamTimer = null;
 var userCamIpSource = "";
 
 function connect() {
@@ -206,6 +206,7 @@ function startMap() {
 		    		
 		    		userCamIpSource = props.remoteAddress;
 		    		
+		    		if(userCamTimer) clearInterval(userCamTimer);
 		    		userCamTimer = setInterval(function(){
 		    			updateUserCam( );
 		        	}, 500);		    		
@@ -244,6 +245,10 @@ function updateUserCam( ) {
 	// http://191.25.68.237:8080/status.json
 	// http://191.25.68.237:8080/sensors.json
 	// {"gps":{},"network":{"latitude":-22.8972118,"longitude":-43.1740812,"accuracy":34.4}}
+	
+	if( userCamIpSource.indexOf(':') > -1 ) {
+		userCamIpSource = '[' + userCamIpSource + ']';
+	}
 	
 	var rand = Math.floor(Math.random() * 400000) + 100000 ;
 	var url = "http://"+userCamIpSource+":8080/shot.jpg?rnd=" + rand;
