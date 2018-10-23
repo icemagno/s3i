@@ -62,6 +62,7 @@
 		    <artifactId>spring-security-taglibs</artifactId>
 		</dependency>	
 
+<!-- TEM QUE TIRAR ESSA PARTE PARA RODAR NUM TOMCAT -->
 <!-- 
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
@@ -69,6 +70,7 @@
 			<scope>provided</scope>
 		</dependency>
  -->
+<!-- ********************************************* -->
 
 		<dependency>
 		  <groupId>com.github.seancfoley</groupId>

@@ -305,6 +305,89 @@ function editFireArea() {
 
 function initSystem() {
 	console.log("initSystem");
+
+	
+	function metodo1( data ) {
+		console.log('Metodo 1');
+		console.log( data );
+		
+		// Modo https://ipapi.co/json/  ---------------------
+		var location = data.loc.split(",");
+		var latitude = parseFloat( location[0] );
+		var longitude = parseFloat( location[1] )
+		data.latitude = latitude;
+		data.longitude = longitude;
+		// --------------------------------------------
+		
+		continua( data );
+	}
+	
+	
+	function continua( data ) {
+		
+	    $.ajax({
+	        url: '/phoenix/userdetails?ip=' + data.ip,
+	        dataType: 'json',
+	        success: function (user, textstatus) {
+	        	globalUser = user;
+	        	globalUser.data = data;
+	        	
+	        	getLocation( data );
+	        	
+	        	startMap();
+	        	initAirTraffic();
+	        	initUserLayer();
+	        	initDraw();
+
+	        	// TESTE
+	        	setTimeout(function(){
+	        		fakeDrone(); 
+	        	}, 10000);        	
+	        	// -----------------
+	        	
+	        	/*
+	        	setInterval(function(){
+	        		updateTransit();
+	        	}, 5000);
+	        	*/
+	        	
+	        }
+	    });
+		
+	};
+	
+	function falhouIp() {
+		
+		$.notify({
+			title : '',
+			message: 'Algo deu errado ao determinar seu IP.' 
+		},{
+			type: 'danger',
+			delay : 3000,
+			animate: {
+				enter: 'animated fadeInRight',
+				exit: 'animated fadeOutUp'
+			}			
+		}); 
+		
+	};
+	
+	function metodo2( data ) {
+		console.log('Metodo 2');
+		console.log( data );
+		
+		// Modo http://ipinfo.io  ---------------------
+		var location = data.loc.split(",");
+		var latitude = parseFloat( location[0] );
+		var longitude = parseFloat( location[1] )
+		data.latitude = latitude;
+		data.longitude = longitude;
+		// --------------------------------------------
+		
+		continua( data );		
+		
+		
+	}
 	
 	/*
 	$.getJSON('https://ipapi.co/json/', function(data) {
@@ -347,66 +430,26 @@ function initSystem() {
 	
 	
 	
-	$.getJSON('https://ipapi.co/json/', function(data){
+	$.getJSON('http://ipinfo.io', function(data){
 		
+		if( data ) {
+			metodo2( data );
+		} else {
+			metodo1( data );
+		}
+		
+	}).fail( function(jqXHR, textStatus, errorThrown) { 
+		
+		$.getJSON('https://ipapi.co/json/', function(data){
 			if( data ) {
-		
-				// Modo http://ipinfo.io  ---------------------
-        		var location = data.loc.split(",");
-        		var latitude = parseFloat( location[0] );
-        		var longitude = parseFloat( location[1] )
-				data.latitude = latitude;
-        		data.longitude = longitude;
-        		// --------------------------------------------
-				
-				console.log(" > Dados recebidos : " );
-				console.log( data );
-				console.log(" > --------------------------- " );
-			
-			    $.ajax({
-			        url: '/phoenix/userdetails?ip=' + data.ip,
-			        dataType: 'json',
-			        success: function (user, textstatus) {
-			        	globalUser = user;
-			        	globalUser.data = data;
-			        	
-			        	getLocation( data );
-			        	
-			        	startMap();
-			        	initAirTraffic();
-			        	initUserLayer();
-			        	initDraw();
-		
-			        	// TESTE
-			        	setTimeout(function(){
-			        		fakeDrone(); 
-			        	}, 10000);        	
-			        	// -----------------
-			        	
-			        	/*
-			        	setInterval(function(){
-			        		updateTransit();
-			        	}, 5000);
-			        	*/
-			        	
-			        }
-			    });
-		
+				metodo2( data );
 			} else {
-				
-				$.notify({
-					title : '',
-					message: 'Algo deu errado ao determinar seu IP.' 
-				},{
-					type: 'danger',
-					delay : 3000,
-					animate: {
-						enter: 'animated fadeInRight',
-						exit: 'animated fadeOutUp'
-					}			
-				});  				
-				
-			}		
+				falhouIp();
+			}
+		}).fail( function(jqXHR, textStatus, errorThrown) { 
+			falhouIp();
+		});
+		
 	});
 	
 }
